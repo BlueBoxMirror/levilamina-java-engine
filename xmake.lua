@@ -11,7 +11,7 @@ if not has_config("vs_runtime") then
     set_runtimes("MD")
 end
 
-target("my-mod") -- Change this to your mod name.
+target("levilamina-java-engine") -- Change this to your mod name.
     add_cxflags(
         "/EHa",
         "/utf-8",
@@ -26,6 +26,10 @@ target("my-mod") -- Change this to your mod name.
     add_defines("NOMINMAX", "UNICODE")
     add_files("src/**.cpp")
     add_includedirs("src")
+    add_includedirs("$(env JAVA_HOME)/include")
+    add_includedirs("$(env JAVA_HOME)/include/win32")
+    add_links("jvm")
+    add_linkdirs("$(env JAVA_HOME)/lib")
     add_packages("levilamina")
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
     set_exceptions("none") -- To avoid conflicts with /EHa.

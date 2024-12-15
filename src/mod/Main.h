@@ -1,8 +1,13 @@
 #pragma once
 
 #include "ll/api/mod/NativeMod.h"
+#include "jni.h"
 
 namespace lje {
+
+JavaVM* getJVM();
+JNIEnv* getEnv();
+void detachCurrentThread();
 
 class LJE {
 

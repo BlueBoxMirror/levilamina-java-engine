@@ -9,6 +9,3 @@
  * JDK 版本至少 17
  * 环境变量包含 %JAVA_HOME%\bin\server\jvm.dll
 
-## License
-
-CC0-1.0 © LiteLDev

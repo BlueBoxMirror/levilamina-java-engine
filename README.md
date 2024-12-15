@@ -1,34 +1,12 @@
-# LeviLamina Mod Template
+# LeviLamina Java Engine (未完工)
 
-A LeviLamina mod template
+这个模组是用来加载LeviLamina Java插件用的
 
-This mod is a template for developing LeviLamina mods.
+##注意事项
 
-## Install
-
-Generate a new repository from this template.
-
-## Usage
-
-Before using this mod template, make sure that you have installed XMake and a Minecraft Bedrock Server with LeviLamina.
-
-1. Clone the new repository into a local folder.
-
-1. Change the mod name and the expected LeviLamina version in `xmake.lua`.
-
-1. Add your code.
-
-1. Run `xmake repo -u` in the root of the repository.
-
-1. Run `xmake` to build the mod.
-
-Now the build is complete at `bin/`.
-
-## Contributing
-
-Ask questions by creating an issue.
-
-PRs accepted.
+在本地使用此仓库，需要确保您的Windows系统上:
+. JDK 版本至少 17
+. 环境变量包含 %JAVA_HOME%\bin\server\jvm.dll
 
 ## License
 

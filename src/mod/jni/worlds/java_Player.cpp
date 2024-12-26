@@ -1,17 +1,19 @@
-#include "bluebox_levilamina_engine_worlds_Player.h"
+#include "mod/Entry.h"
+#include "java_Player.h"
 #include "mc/world/actor/player/Player.h"
 #include "mc/enums/TextPacketType.h"
 #include "mc/network/packet/TextPacket.h"
 #include "jni.h"
 
-jstring lje::Java_bluebox_levilamina_engine_worlds_Player_getRealName(JNIEnv *env, jobject thisObj){
+namespace lje::j_Player{
+jstring getRealName(JNIEnv *env, jobject thisObj){
     jfieldID jfield_nativePtr=env->GetFieldID(env->GetObjectClass(thisObj), "nativePtr", "J");
     Player* player=(Player*)env->GetLongField(thisObj, jfield_nativePtr);
     jstring jstring_realName=env->NewStringUTF(player->getRealName().c_str());
     return jstring_realName;
 }
 
-void lje::Java_bluebox_levilamina_engine_worlds_Player_tell(JNIEnv *env, jobject thisObj, jstring jstring_message){
+void tell(JNIEnv *env, jobject thisObj, jstring jstring_message){
     jfieldID jfield_nativePtr=env->GetFieldID(env->GetObjectClass(thisObj), "nativePtr", "J");
     Player* player=(Player*)env->GetLongField(thisObj, jfield_nativePtr);
     const char* message=env->GetStringUTFChars(jstring_message, 0);
@@ -23,11 +25,12 @@ void lje::Java_bluebox_levilamina_engine_worlds_Player_tell(JNIEnv *env, jobject
     env->ReleaseStringUTFChars(jstring_message, message);
 }
 
-jobject lje::newJavaPlayer(JNIEnv *env,Player *player){
-    jclass jclass_Player=env->FindClass("Lbluebox/levilamina/engine/worlds/Player;");
+jobject newJavaPlayer(JNIEnv *env,Player *player){
+    jclass jclass_Player=env->FindClass(PACK_JAVA_NAME("worlds/Player"));
     env->ExceptionDescribe();
     jobject jobject_player=env->AllocObject(jclass_Player);
     jfieldID jfield_nativePtr=env->GetFieldID(jclass_Player, "nativePtr", "J");
     env->SetLongField(jobject_player, jfield_nativePtr, (jlong)player);
     return jobject_player;
+}
 }

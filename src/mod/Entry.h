@@ -1,7 +1,11 @@
 #pragma once
 
+#include "PluginManager.h"
 #include "ll/api/mod/NativeMod.h"
+
 #include "jni.h"
+
+#define PACK_JAVA_NAME(name) "Lbluebox/ll/" name ";"
 
 namespace lje {
 
@@ -9,9 +13,12 @@ JavaVM* getJVM();
 JNIEnv* getEnv();
 void detachCurrentThread();
 
-class LJE {
+class LJE{
 
 public:
+
+    static LJE_Manager& getPluginManager();
+
     static LJE& getInstance();
 
     LJE(ll::mod::NativeMod& self) : mSelf(self) {}

@@ -1,6 +1,8 @@
 package bluebox.ll;
 
-public class Logger {
+import bluebox.ll.memory.PointerSupporter;
+
+public class Logger implements PointerSupporter {
     private Logger(long nativePtr){
         this.isInStack=false;
         this.nativePtr=nativePtr;
@@ -17,4 +19,9 @@ public class Logger {
     public native void debug(String message);
     public native void warn(String message);
     public native void dispose();
+
+    @Override
+    public long getNativePointer() {
+        return nativePtr;
+    }
 }

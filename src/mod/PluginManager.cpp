@@ -1,6 +1,7 @@
 #include "PluginManager.h"
 #include "Entry.h"
 #include <jni.h>
+#include "jni/plugin/java_LeviLamina.h"
 #include "ll/api/Expected.h"
 #include "ll/api/mod/Mod.h"
 #include "mod/Entry.h"
@@ -12,13 +13,20 @@ LJE_Manager* lje_manager_instance;
 
 bool LJE_Manager::loadPlugin(const std::string& modDirPath){
     JNIEnv* env=getEnv();
-    jclass jclass_LeviLamina=env->FindClass(PACK_JAVA_NAME("LeviLamina"));
-    jmethodID jmethod_LeviLamina_load=env->GetStaticMethodID(jclass_LeviLamina, "load", "(Ljava/lang/String;)Z");
+    jclass jclass_LeviLamina=env->FindClass(JCLASS_LEVILAMINA);
+    jmethodID jmethod_LeviLamina_load=env->GetStaticMethodID(jclass_LeviLamina, "addPlugin", "(Ljava/lang/String;)V");
     jstring jstring_native_modDirPath=env->NewStringUTF(modDirPath.c_str());
-    jboolean jboolean_isSuccess=env->CallStaticBooleanMethod(jclass_LeviLamina, jmethod_LeviLamina_load, jstring_native_modDirPath);
+    env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_load, jstring_native_modDirPath);
+    if(env->ExceptionCheck()){
+        env->ExceptionDescribe();
+        env->ExceptionClear();
+        env->DeleteLocalRef(jstring_native_modDirPath);
+        detachCurrentThread();
+        return false;
+    }
     env->DeleteLocalRef(jstring_native_modDirPath);
     detachCurrentThread();
-    return jboolean_isSuccess==JNI_TRUE;
+    return true;
 }
 
 LJE_Manager::LJE_Manager():ll::mod::ModManager("jvm"){
@@ -44,7 +52,7 @@ void LJE_Manager::removeMod(std::string_view name){
 
 ll::Expected<> LJE_Manager::unload(std::string_view name){
     JNIEnv* env=getEnv();
-    jclass jclass_LeviLamina=env->FindClass(PACK_JAVA_NAME("LeviLamina"));
+    jclass jclass_LeviLamina=env->FindClass(JCLASS_LEVILAMINA);
     jmethodID jmethod_LeviLamina_removeMod=env->GetMethodID(jclass_LeviLamina, "removeMod", "(Ljava/lang/String;)V");
     jstring jstring_native_name=env->NewStringUTF(name.data());
     env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_removeMod, jstring_native_name);

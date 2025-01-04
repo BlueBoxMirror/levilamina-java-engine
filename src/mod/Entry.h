@@ -6,6 +6,7 @@
 #include "jni.h"
 
 #define PACK_JAVA_NAME(name) "Lbluebox/ll/" name ";"
+#define JCLASS_STRING "Ljava/lang/String;"
 
 namespace lje {
 

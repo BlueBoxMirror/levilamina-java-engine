@@ -14,7 +14,7 @@
 #define JCLASS_LONG_TAG         PACK_JAVA_NAME("util/nbt/TagLong")
 #define JCLASS_FLOAT_TAG        PACK_JAVA_NAME("util/nbt/TagFloat")
 #define JCLASS_DOUBLE_TAG       PACK_JAVA_NAME("util/nbt/TagDouble")
-#define JCLASS_STRING_TAG       PACK_JAVA_NAME("util/nbt/TagString")
+#define JCLASS_String_TAG       PACK_JAVA_NAME("util/nbt/TagString")
 #define JCLASS_BYTEARRAY_TAG    PACK_JAVA_NAME("util/nbt/TagByteArray")
 #define JCLASS_INTARRAY_TAG     PACK_JAVA_NAME("util/nbt/TagIntArray")
 #define JCLASS_END_TAG          PACK_JAVA_NAME("util/nbt/TagEnd")

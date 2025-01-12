@@ -4,11 +4,7 @@
 #include "ll/api/mod/NativeMod.h"
 
 #include "jni.h"
-
-#define PACK_JAVA_NAME(name) "Lbluebox/ll/" name ";"
-#define JCLASS_STRING "Ljava/lang/String;"
-#define JCLASS_LEVILAMINA PACK_JAVA_NAME("plugin/LeviLamina")
-#define JCLASS_LOGGER PACK_JAVA_NAME("Logger")
+#include "util.h"
 
 namespace lje {
 
@@ -39,7 +35,7 @@ public:
 
     // TODO: Implement this method if you need to unload the mod.
     // /// @return True if the mod is unloaded successfully.
-    // bool unload();
+    bool unload();
 
 private:
     ll::mod::NativeMod& mSelf;

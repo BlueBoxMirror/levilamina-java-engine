@@ -32,3 +32,14 @@ JNIEXPORT void JNICALL Java_bluebox_ll_entity_Player_sendChat
     player->sendNetworkPacket(packet);
     env->ReleaseStringUTFChars(jstr_message,c_message);
   }
+
+  /*
+ * Class:     bluebox_ll_entity_Player
+ * Method:    updateInventory
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_bluebox_ll_entity_Player_updateInventory
+  (JNIEnv *env, jobject thisObj){
+    Player* player = (Player*)lje::getNativePointer(env, thisObj);
+    player->refreshInventory();
+  }

@@ -16,7 +16,7 @@ jobject newTagCompound(JNIEnv* env, const CompoundTag* compound){
     jclass jclass_NbtCompound=env->FindClass(JCLASS_COMPOUND_TAG);
     jmethodID jmethod_NbtCompound_init=env->GetMethodID(jclass_NbtCompound,"<init>","()V");
     jobject jobject_native_compound=env->NewObject(jclass_NbtCompound,jmethod_NbtCompound_init);
-    jmethodID jmethod_NbtCompound_put=env->GetMethodID(jclass_NbtCompound,"put","(Ljava/lang/String;" JCLASS_COMPOUND_TAG ")" JCLASS_COMPOUND_TAG );
+    jmethodID jmethod_NbtCompound_put=env->GetMethodID(jclass_NbtCompound,"put","(" JCLASS_String JCLASS_TAG ")" JCLASS_TAG );
     for(auto it=compound->begin();it!=compound->end();++it){
         const std::string& key=it->first;
         const Tag& tag=it->second.get();
@@ -72,7 +72,7 @@ jobject newTagList(JNIEnv* env, const ListTag* list){
     jclass jclass_NbtList=env->FindClass(JCLASS_LIST_TAG);
     jmethodID jmethod_NbtList_init=env->GetMethodID(jclass_NbtList,"<init>","()V");
     jobject jobject_native_list=env->NewObject(jclass_NbtList,jmethod_NbtList_init);
-    jmethodID jmethod_NbtList_add=env->GetMethodID(jclass_NbtList,"add","(" JCLASS_COMPOUND_TAG ")Z");
+    jmethodID jmethod_NbtList_add=env->GetMethodID(jclass_NbtList,"add","(" JCLASS_TAG ")Z");
     for(auto it=list->begin();it!=list->end();++it){
         const Tag* tag=it->get();
         jobject jobject_native_note=nullptr;
@@ -158,7 +158,7 @@ jobject newTagDouble(JNIEnv* env, const DoubleTag* value){
 }
 
 jobject newTagString(JNIEnv* env, const StringTag* value){
-    jclass jclass_NbtString=env->FindClass(JCLASS_STRING_TAG);
+    jclass jclass_NbtString=env->FindClass(JCLASS_String_TAG);
     jmethodID jmethod_NbtString_init=env->GetMethodID(jclass_NbtString,"<init>","(Ljava/lang/String;)V");
     jstring jstring_native_value=env->NewStringUTF(value->data());
     jobject jobject_native_value=env->NewObject(jclass_NbtString,jmethod_NbtString_init,jstring_native_value);
@@ -224,7 +224,7 @@ void toNativeDouble(JNIEnv *env, jobject obj, DoubleTag &tag){
     tag.data=(double)env->GetDoubleField(obj,jmethod_NbtDouble_value);
 }
 void toNativeString(JNIEnv *env, jobject obj, StringTag &tag){
-    jclass jclass_NbtString=env->FindClass(JCLASS_STRING_TAG);
+    jclass jclass_NbtString=env->FindClass(JCLASS_String_TAG);
     jfieldID jfield_NbtString_value=env->GetFieldID(jclass_NbtString,"value","Ljava/lang/String;");
     jstring jstring_value=(jstring)env->GetObjectField(obj,jfield_NbtString_value);
     const char* c_str_value=env->GetStringUTFChars(jstring_value,nullptr);
@@ -342,20 +342,23 @@ void toNativeList(JNIEnv *env, jobject thisObj, ListTag &tag){
     
 void toNativeCompound(JNIEnv *env, jobject thisObj, CompoundTag &tag){
     jclass jclass_NbtCompound=env->FindClass(JCLASS_COMPOUND_TAG);
+    jclass jclass_Iterator=env->FindClass("Ljava/util/Iterator;");
+    jclass jclass_Set=env->FindClass("Ljava/util/Set;");
     jclass jclass_Nbt=env->FindClass(JCLASS_TAG);
     jmethodID jmethod_Nbt_getId=env->GetMethodID(jclass_Nbt,"getId","()I");
     jmethodID jmethod_NbtCompound_entrySet=env->GetMethodID(jclass_NbtCompound,"entrySet","()Ljava/util/Set;");
     jobject jobject_native_entries=env->CallObjectMethod(thisObj,jmethod_NbtCompound_entrySet);
-    jclass jclass_NbtCompound_Entry=env->FindClass(PACK_JAVA_NAME("nbt/util/NbtCompound$Entry"));
-    jmethodID jmethod_NbtCompound_Entry_getKey=env->GetMethodID(jclass_NbtCompound_Entry,"getKey","()Ljava/lang/String;");
-    jmethodID jmethod_NbtCompound_Entry_getValue=env->GetMethodID(jclass_NbtCompound_Entry,"getValue","()" JCLASS_TAG);
-    jmethodID jmethod_NbtCompound_Entry_iterator=env->GetMethodID(jclass_NbtCompound_Entry,"iterator","()Ljava/util/Iterator;");
-    jmethodID jmethod_NbtCompound_Entry_hasNext=env->GetMethodID(jclass_NbtCompound_Entry,"hasNext","()Z");
-    jmethodID jmethod_NbtCompound_Entry_next=env->GetMethodID(jclass_NbtCompound_Entry,"next","()Ljava/lang/Object;");
-    jobject jobject_native_entry_iterator=env->CallObjectMethod(jobject_native_entries,jmethod_NbtCompound_Entry_iterator);
+    jclass jclass_NbtCompound_Entry=env->FindClass("Ljava/util/Map$Entry;");
+    jmethodID jmethod_NbtCompound_Entry_getKey=env->GetMethodID(jclass_NbtCompound_Entry,"getKey","()Ljava/lang/Object;");
+    jmethodID jmethod_NbtCompound_Entry_getValue=env->GetMethodID(jclass_NbtCompound_Entry,"getValue","()Ljava/lang/Object;");
+    jmethodID jmethod_Set_iterator=env->GetMethodID(jclass_Set,"iterator","()Ljava/util/Iterator;");
+    env->ExceptionDescribe();
+    jmethodID jmethod_NbtCompound_Iterator_hasNext=env->GetMethodID(jclass_Iterator,"hasNext","()Z");
+    jmethodID jmethod_NbtCompound_Iterator_next=env->GetMethodID(jclass_Iterator,"next","()Ljava/lang/Object;");
+    jobject jobject_native_entry_iterator=env->CallObjectMethod(jobject_native_entries,jmethod_Set_iterator);
     
-    while(env->CallBooleanMethod(jobject_native_entry_iterator,jmethod_NbtCompound_Entry_hasNext)){
-        jobject jobject_native_entry=env->CallObjectMethod(jobject_native_entry_iterator,jmethod_NbtCompound_Entry_next);
+    while(env->CallBooleanMethod(jobject_native_entry_iterator,jmethod_NbtCompound_Iterator_hasNext)){
+        jobject jobject_native_entry=env->CallObjectMethod(jobject_native_entry_iterator,jmethod_NbtCompound_Iterator_next);
         jstring jstring_native_key=(jstring)env->CallObjectMethod(jobject_native_entry,jmethod_NbtCompound_Entry_getKey);
         jobject jobject_native_tag=(jobject)env->CallObjectMethod(jobject_native_entry,jmethod_NbtCompound_Entry_getValue);
         const char* c_str_key=nullptr;

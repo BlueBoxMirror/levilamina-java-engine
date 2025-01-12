@@ -18,7 +18,7 @@ public:
     auto operator=(const LJE_Manager&) -> LJE_Manager& = delete;
     auto operator=(LJE_Manager&&) -> LJE_Manager&      = delete;
 
-    void removeMod(std::string_view name);
+    //void removeMod(std::string_view name);
 
     ~LJE_Manager() override = default;
 

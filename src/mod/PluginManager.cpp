@@ -12,7 +12,7 @@ LJE_Manager* lje_manager_instance;
 
 bool LJE_Manager::loadPlugin(const std::string& modDirPath){
     JNIEnv* env=getEnv();
-    jclass jclass_LeviLamina=env->FindClass(JCLASS_LEVILAMINA);
+    jclass jclass_LeviLamina=env->FindClass(JCLASS_LeviLamina);
     jmethodID jmethod_LeviLamina_load=env->GetStaticMethodID(jclass_LeviLamina, "addPlugin", "(Ljava/lang/String;)V");
     jstring jstring_native_modDirPath=env->NewStringUTF(modDirPath.c_str());
     env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_load, jstring_native_modDirPath);
@@ -45,18 +45,19 @@ ll::Expected<> LJE_Manager::load(ll::mod::Manifest manifest){
     else return ll::makeStringError("Failed to load plugin "+manifest.name);
 }
 
-void LJE_Manager::removeMod(std::string_view name){
-    eraseMod(name);
-}
+// void LJE_Manager::removeMod(std::string_view name){
+//     eraseMod(name);
+// }
 
 ll::Expected<> LJE_Manager::unload(std::string_view name){
     JNIEnv* env=getEnv();
-    jclass jclass_LeviLamina=env->FindClass(JCLASS_LEVILAMINA);
-    jmethodID jmethod_LeviLamina_removeMod=env->GetMethodID(jclass_LeviLamina, "removeMod", "(Ljava/lang/String;)V");
+    jclass jclass_LeviLamina=env->FindClass(JCLASS_LeviLamina);
+    jmethodID jmethod_LeviLamina_unload=env->GetStaticMethodID(jclass_LeviLamina, "unload", "(Ljava/lang/String;)Z");
     jstring jstring_native_name=env->NewStringUTF(name.data());
-    env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_removeMod, jstring_native_name);
+    bool isSuccess=env->CallStaticBooleanMethod(jclass_LeviLamina, jmethod_LeviLamina_unload, jstring_native_name);
     env->DeleteLocalRef(jstring_native_name);
     detachCurrentThread();
+    if(!isSuccess) return ll::makeStringError("Failed to unload plugin "+std::string(name));
     eraseMod(name);
     return {};
 }

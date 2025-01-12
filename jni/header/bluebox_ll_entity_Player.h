@@ -23,6 +23,14 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Player_getRealName
 JNIEXPORT void JNICALL Java_bluebox_ll_entity_Player_sendChat
   (JNIEnv *, jobject, jstring, jobject);
 
+/*
+ * Class:     bluebox_ll_entity_Player
+ * Method:    updateInventory
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_bluebox_ll_entity_Player_updateInventory
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

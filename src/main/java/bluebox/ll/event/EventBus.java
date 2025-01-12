@@ -1,16 +1,27 @@
 package bluebox.ll.event;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class EventBus{
     private static final HashMap<String, LinkedList<EventListener<?>>> listeners = new HashMap<>();
 
-    public static <T extends Event> void emplaceListener(Class<T> eventType, EventListener<T> listener){
-        listeners.putIfAbsent(eventType.getName(), new LinkedList<>());
-        listeners.get(eventType.getName()).add(listener);
+    public static <T extends Event> @NotNull EventHandler<T> emplaceListener(Class<T> eventType, EventListener<T> listener){
+        EventHandler<T> handler = new EventHandler<>(eventType, listener);
+        register(handler);
+        return handler;
     }
 
-    public static void publish(Event event){
+    protected static <T extends Event> void register(@NotNull EventHandler<T> handler){
+        listeners.putIfAbsent(handler.type.getName(), new LinkedList<>());
+        listeners.get(handler.type.getName()).add(handler.listener);
+    }
+    protected static <T extends Event> void unregister(@NotNull EventHandler<T> handler){
+        listeners.get(handler.type.getName()).remove(handler.listener);
+    }
+
+    public static void publish(@NotNull Event event){
         Queue<String> queue = new LinkedList<>();
         Class eventType = event.getClass();
         queue.offer(eventType.getName());

@@ -8,7 +8,7 @@ import java.util.Base64;
 import java.util.function.BiConsumer;
 
 public class SnbtParseImpl {
-    public static boolean startsWith(StringBuilder s,String prefix){
+    static boolean startsWith(StringBuilder s,String prefix){
         return s.length()>=prefix.length() && s.substring(0,prefix.length()).equals(prefix);
     }
     public static Tag parseSnbtValue(StringBuilder s){
@@ -17,7 +17,7 @@ public class SnbtParseImpl {
         skipWhitespace(s);
         return res;
     }
-    public static Tag parseSnbtValueNonSkip(StringBuilder s){
+    static Tag parseSnbtValueNonSkip(StringBuilder s){
         if (s.isEmpty()) throw new IllegalArgumentException("Empty string");
         switch (s.charAt(0)) {
             case 't':
@@ -66,13 +66,13 @@ public class SnbtParseImpl {
         }
         return new TagString(parseString(s));
     }
-    public static char get(StringBuilder s){
+    static char get(StringBuilder s){
         if (s.isEmpty()) return '\0';
         char c = s.charAt(0);
         s.deleteCharAt(0);
         return c;
     }
-    public static Tag parseCompound(StringBuilder s){
+    static Tag parseCompound(StringBuilder s){
         get(s);
         skipWhitespace(s);
         if (s.charAt(0)=='}') {
@@ -107,10 +107,10 @@ public class SnbtParseImpl {
         }
         throw new IllegalArgumentException("Unclosed bracket");
     }
-    public static boolean isTrivialNbtStringChar(char c){
+    static boolean isTrivialNbtStringChar(char c){
         return Character.isLetterOrDigit(c) || c == '-' || c == '+' || c == '_' || c == '.';
     }
-    public static int getCodePoint(StringBuilder s){
+    static int getCodePoint(StringBuilder s){
         int codepoint = 0;
 
         for (int factor : new int[]{12, 8, 4, 0}) {
@@ -129,7 +129,7 @@ public class SnbtParseImpl {
 
         return codepoint;
     }
-    public static String parseString(StringBuilder s){
+    static String parseString(StringBuilder s){
         char starts = s.charAt(0);
 
         if (starts != '\"' && starts != '\'' && !isTrivialNbtStringChar(starts)) {
@@ -298,19 +298,19 @@ public class SnbtParseImpl {
         }
         throw new IllegalArgumentException("Illegal Utf8 character");
     }
-    public static Tag parseByteArray(StringBuilder s){
+    static Tag parseByteArray(StringBuilder s){
         ArrayList<Byte> res=parseNumArray(s,TagByte.class, (arr,num)->{
             arr.add(num.get());
         });
         return new TagByteArray(res.toArray(new Byte[0]));
     }
-    public static Tag parseIntArray(StringBuilder s){
+    static Tag parseIntArray(StringBuilder s){
         ArrayList<Integer> res=parseNumArray(s,TagInt.class, (arr,num)->{
             arr.add(num.get());
         });
         return new TagIntArray(res.toArray(new Integer[0]));
     }
-    public static Tag parseLongArray(StringBuilder s){
+    static Tag parseLongArray(StringBuilder s){
         ArrayList<Byte> res=parseNumArray(s,TagLong.class, (arr,num)->{
             long val=num.get();
             for (int j = 7; j >= 0; j--) {
@@ -319,7 +319,7 @@ public class SnbtParseImpl {
         });
         return new TagByteArray(res.toArray(new Byte[0]));
     }
-    public static <T,H extends Tag> ArrayList<T> parseNumArray(StringBuilder s,Class<H> type, BiConsumer<ArrayList<T>,H> f){
+    static <T,H extends Tag> ArrayList<T> parseNumArray(StringBuilder s,Class<H> type, BiConsumer<ArrayList<T>,H> f){
         ArrayList<T> res=new ArrayList<>();
         while(!s.isEmpty()){
             skipWhitespace(s);
@@ -345,7 +345,7 @@ public class SnbtParseImpl {
         }
         throw new IllegalArgumentException("Unclosed bracket");
     }
-    public static Tag parseList(StringBuilder s){
+    static Tag parseList(StringBuilder s){
         if (startsWith(s,"[ /*") && (s.length() > 7 && s.charAt(6) == '*' && s.charAt(7) == '/')) {
             s.delete(0,4);
         } else {
@@ -392,7 +392,7 @@ public class SnbtParseImpl {
         }
         throw new IllegalArgumentException("Unclosed bracket");
     }
-    public static Tag parseNumber(StringBuilder s){
+    static Tag parseNumber(StringBuilder s){
         ParsePosition n=new ParsePosition(0);
         double res=0;
         res=stold(s,n);
@@ -472,7 +472,7 @@ public class SnbtParseImpl {
             return new TagDouble(res);
         }
     }
-    public static double stold(StringBuilder s, ParsePosition n){
+    static double stold(StringBuilder s, ParsePosition n){
         ParsePosition eptr=new ParsePosition(0);
         Number res=NumberFormat.getInstance().parse(s.toString(),eptr);
         if(eptr.getIndex()==0){
@@ -481,7 +481,7 @@ public class SnbtParseImpl {
         n.setIndex(eptr.getIndex());
         return res.doubleValue();
     }
-    public static void skipWhitespace(StringBuilder s){
+    static void skipWhitespace(StringBuilder s){
         scanSpaces(s);
         while (s.length()>1 &&( s.charAt(0)=='/' || s.charAt(0)=='#' || s.charAt(0)==';' )) {
             s.deleteCharAt(0);
@@ -489,13 +489,13 @@ public class SnbtParseImpl {
             scanSpaces(s);
         }
     }
-    public static void scanSpaces(StringBuilder s){
+    static void scanSpaces(StringBuilder s){
         int i=0;
         while(i < s.length() && Character.isWhitespace(s.charAt(i++)));
         if(i-1<0) return;
         s.delete(0,Math.min(i-1,s.length()));
     }
-    public static void scanComment(StringBuilder s){
+    static void scanComment(StringBuilder s){
         int i=0;
         switch (s.charAt(i++)) {
             // multi-line comments skip input until */ is read

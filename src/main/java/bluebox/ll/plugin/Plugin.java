@@ -8,7 +8,6 @@ import java.io.File;
 
 public interface Plugin {
     Gson gson=new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-    void disable();
     Manifest getManifest();
     default String getName(){
         return getManifest().name;

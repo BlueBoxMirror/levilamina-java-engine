@@ -5,6 +5,9 @@ public class TagByte implements TagElement<Byte> {
     public TagByte(byte value) {
         this.value = value;
     }
+    public TagByte(boolean value){
+        this.value = (byte)(value? 1 : 0);
+    }
     public boolean toBoolean(){
         return value!= 0;
     }

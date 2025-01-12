@@ -22,7 +22,7 @@ import java.util.zip.ZipFile;
 
 public class LeviLamina{
     private static final HashMap<String, JavaPlugin> mods=new HashMap<>();
-    private static final LinkedList<Manifest> preloadMods=new LinkedList<>();
+    private static final HashMap<String,Manifest> preloadMods=new HashMap<>();
     private static final Gson gson=new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     private static File modRootDir;
     private static Logger logger;
@@ -34,6 +34,7 @@ public class LeviLamina{
     private static void init(){
         System.setErr(getErrorStream());
         System.setOut(getOutputStream());
+        System.load(new File(getModRootDir(),"levilamina-java-engine/lje-jni-api.dll").getAbsolutePath());
     }
 
 
@@ -44,7 +45,7 @@ public class LeviLamina{
         return logger;
     }
     public static PrintStream getErrorStream(){
-        return new PrintStream(new LoggerStream(logger,LoggerStream.MODE_ERROR),true);
+        return new PrintStream(new LoggerStream(logger,LoggerStream.PrintMode.ERROR),true);
     }
     public static PrintStream getOutputStream(){
         return new PrintStream(new LoggerStream(logger),true);
@@ -58,59 +59,76 @@ public class LeviLamina{
     private static native Plugin getNativePlugin(String name);
 
     private static void addPlugin(String modDirPath){
-        if(classLoader!=null) throw new IllegalStateException("Plugins already enabled");
         try {
             File modDir=new File(modDirPath);
             File manifestFile=new File(modDir,"manifest.json");
             Manifest manifest=gson.fromJson(new FileReader(manifestFile,StandardCharsets.UTF_8),Manifest.class);
-            File entryFile=new File(modDir,manifest.entry);
-            if(!entryFile.exists()){
-                throw new IllegalArgumentException("Entry file not found: "+entryFile.getAbsolutePath());
-            }
             if(manifest.entryClass==null){
                 throw new IllegalArgumentException("Entry class not specified in manifest,you need to specify it at manifest.json/entryClass");
             }
-            preloadMods.add(manifest);
-            logger.info("Loaded plugin "+manifest.name+" from "+modDirPath);
+
+            Class<JavaPlugin> pluginClass=(Class<JavaPlugin>) classLoader.loadClass(manifest.entryClass);
+            Constructor<JavaPlugin> pluginConstructor= pluginClass.getConstructor();
+            JavaPlugin plugin=pluginConstructor.newInstance();
+            JavaPlugin.init(plugin,manifest);
+            plugin.onLoad();
+            getLogger().info("Loading plugin "+manifest.name);
+            mods.put(manifest.name,plugin);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void enable(){
+    private static void load(){
         LinkedList<URL> urls=new LinkedList<>();
-        for (Manifest manifest : preloadMods) {
-            File modDir=new File(getModRootDir(),manifest.name);
-            File entryFile=new File(modDir,manifest.entry);
+        for (File dir : getModRootDir().listFiles()) {
             try {
-                urls.add(entryFile.toURI().toURL());
-            } catch (MalformedURLException e) {
-                e.printStackTrace(getErrorStream());
+                if(dir.isDirectory()){
+                    File manifestFile=new File(dir,"manifest.json");
+                    if(!manifestFile.exists()) continue;
+                    Manifest manifest=gson.fromJson(new FileReader(manifestFile,StandardCharsets.UTF_8),Manifest.class);
+                    if(manifest.type==null || !manifest.type.equals("jvm")) continue;
+                    if(manifest.name==null || manifest.entry==null || manifest.entryClass==null) continue;
+                    File entryFile=new File(dir,manifest.entry);
+                    if(!entryFile.exists() || !entryFile.isFile()) continue;
+                    preloadMods.put(manifest.name,manifest);
+                    urls.add(entryFile.toURI().toURL());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
         classLoader=new URLClassLoader(urls.toArray(new URL[0]));
-        for (Manifest manifest : preloadMods) {
+    }
+
+    private static void enable(){
+        for (JavaPlugin plugin : mods.values().toArray(new JavaPlugin[0])) {
             try {
-                Class<JavaPlugin> pluginClass=(Class<JavaPlugin>) classLoader.loadClass(manifest.entryClass);
-                Constructor<JavaPlugin> pluginConstructor= pluginClass.getConstructor();
-                JavaPlugin plugin=pluginConstructor.newInstance();
-                JavaPlugin.init(plugin,manifest);
                 plugin.onEnable();
-                getLogger().info("Enabled plugin "+manifest.name);
-                mods.put(manifest.name,plugin);
             } catch (Exception e) {
-                removeModInNative(manifest.name);
-                e.printStackTrace(getErrorStream());
+                e.printStackTrace(plugin.getErrorStream());
             }
         }
     }
     private static void disable(){
         for (JavaPlugin plugin : mods.values().toArray(new JavaPlugin[0])) {
-            plugin.disable();
+            try {
+                plugin.onDisable();
+            } catch (Exception e) {
+                e.printStackTrace(new PrintStream(new LoggerStream(plugin.getLogger(),LoggerStream.PrintMode.WARN),true));
+            }
         }
     }
-    protected static void removeMod(String name){
-        if(mods.remove(name)!=null) removeModInNative(name);
+    private static boolean unload(String name){
+        JavaPlugin plugin=mods.get(name);
+        if(plugin==null) return false;
+        try {
+            plugin.onUnload();
+            mods.remove(name);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace(plugin.getErrorStream());
+            return false;
+        }
     }
-    private static native void removeModInNative(String name);
 }

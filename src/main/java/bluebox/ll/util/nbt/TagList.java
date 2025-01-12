@@ -101,6 +101,7 @@ public class TagList implements Tag,List<Tag> ,Cloneable{
 
     @Override
     public boolean add(Tag tag) {
+
         return list.add(tag);
     }
 

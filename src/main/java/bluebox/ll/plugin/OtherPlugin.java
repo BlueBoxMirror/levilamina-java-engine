@@ -21,8 +21,6 @@ public class OtherPlugin implements Plugin {
     private final Manifest manifest;
     private final Logger logger;
     @Override
-    public native void disable();
-    @Override
     public Manifest getManifest() {
         return manifest;
     }

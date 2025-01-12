@@ -5,20 +5,22 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class LoggerStream extends OutputStream {
-    public static final int MODE_INFO = 0;
-    public static final int MODE_ERROR = 1;
-    public static final int MODE_DEBUG = 2;
-    public static final int MODE_WARN = 3;
-    public LoggerStream(Logger logger,int mode){
+    public enum PrintMode{
+        INFO,
+        ERROR,
+        DEBUG,
+        WARN
+    }
+    public LoggerStream(Logger logger,PrintMode mode){
         this.logger = logger;
         this.mode=mode;
     }
     public LoggerStream(Logger logger){
-        this(logger,MODE_INFO);
+        this(logger, PrintMode.INFO);
     }
     private final Logger logger;
     private final StringBuffer buffer = new StringBuffer();
-    public final int mode;
+    public PrintMode mode;
     @Override
     public void write(int b) throws IOException {
         buffer.append((char) b);
@@ -28,16 +30,16 @@ public class LoggerStream extends OutputStream {
         String[] messages = buffer.toString().split("\n");
         for(String message:messages) {
             switch (mode) {
-                case MODE_INFO:
+                case INFO:
                     logger.info(message);
                     break;
-                case MODE_ERROR:
+                case ERROR:
                     logger.error(message);
                     break;
-                case MODE_DEBUG:
+                case DEBUG:
                     logger.debug(message);
                     break;
-                case MODE_WARN:
+                case WARN:
                     logger.warn(message);
                     break;
             }

@@ -7,6 +7,16 @@ public class NbtObject {
         this.tag=tag;
     }
     private final Tag tag;
+    public NbtObject get(String key){
+        return new NbtObject(((TagCompound)tag).get(key));
+    }
+    public NbtObject get(int index){
+        return new NbtObject(((TagList)tag).get(index));
+    }
+    public NbtObject put(String key,Tag value){
+        ((TagCompound)tag).put(key,value);
+        return this;
+    }
     public int getId(){
         return tag.getId();
     }
@@ -16,52 +26,52 @@ public class NbtObject {
     public boolean isCompoundOrList(){
         return tag instanceof TagCompound || tag instanceof TagList;
     }
-    public void set(boolean value){
+    public void setValue(boolean value){
         ((TagByte)tag).set(value);
     }
-    public void set(byte value){
+    public void setValue(byte value){
         ((TagByte)tag).set(value);
     }
-    public void set(short value){
+    public void setValue(short value){
         ((TagShort)tag).set(value);
     }
-    public void set(int value){
+    public void setValue(int value){
         ((TagInt)tag).set(value);
     }
-    public void set(long value){
+    public void setValue(long value){
         ((TagLong)tag).set(value);
     }
-    public void set(float value){
+    public void setValue(float value){
         ((TagFloat)tag).set(value);
     }
-    public void set(double value){
+    public void setValue(double value){
         ((TagDouble)tag).set(value);
     }
-    public void set(String value){
+    public void setValue(String value){
         ((TagString)tag).set(value);
     }
-    public boolean getBoolean(){
+    public boolean getAsBoolean(){
         return ((TagByte)tag).toBoolean();
     }
-    public byte getByte(){
+    public byte getAsByte(){
         return ((TagByte)tag).get();
     }
-    public short getShort(){
+    public short getAsShort(){
         return ((TagShort)tag).get();
     }
-    public int getInt(){
+    public int getAsInt(){
         return ((TagInt)tag).get();
     }
-    public long getLong(){
+    public long getAsLong(){
         return ((TagLong)tag).get();
     }
-    public float getFloat(){
+    public float getAsFloat(){
         return ((TagFloat)tag).get();
     }
-    public double getDouble(){
+    public double getAsDouble(){
         return ((TagDouble)tag).get();
     }
-    public String getString(){
+    public String getAsString(){
         return ((TagString)tag).get();
     }
     public <T extends Tag> T as(Class<T> clazz){

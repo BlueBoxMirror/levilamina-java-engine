@@ -1,17 +1,18 @@
 package bluebox.ll.event.player;
 
+import bluebox.ll.entity.Entity;
 import bluebox.ll.entity.Player;
 import bluebox.ll.event.Cancellable;
 
-/**
- * 玩家加入游戏事件
- */
-public class PlayerJoinEvent extends PlayerEvent implements Cancellable {
-    public PlayerJoinEvent(Player player) {
+public class PlayerAttackEvent extends PlayerEvent implements Cancellable {
+    public PlayerAttackEvent(Player player, Entity target,int cause) {
         super(player);
+        this.target = target;
+        this.cause = cause;
     }
+    public final Entity target;
     private boolean cancelled = false;
-
+    public final int cause;
     @Override
     public boolean isCancelled() {
         return cancelled;

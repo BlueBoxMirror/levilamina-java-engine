@@ -7,6 +7,8 @@
 
 #define PACK_JAVA_NAME(name) "Lbluebox/ll/" name ";"
 #define JCLASS_STRING "Ljava/lang/String;"
+#define JCLASS_LEVILAMINA PACK_JAVA_NAME("plugin/LeviLamina")
+#define JCLASS_LOGGER PACK_JAVA_NAME("Logger")
 
 namespace lje {
 

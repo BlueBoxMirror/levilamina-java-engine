@@ -1,19 +1,15 @@
+#include <iostream>
 #include <memory>
 #include <string>
 
 #include "Entry.h"
 #include "PluginManager.h"
-#include "jni/plugin/java_LeviLamina.h"
-#include "jni/java_Log.h"
-#include "jni/register.h"
 #include "ll/api/Expected.h"
 #include "ll/api/Logger.h"
-#include "ll/api/mod/Manifest.h"
 #include "ll/api/mod/Mod.h"
 #include "ll/api/mod/ModManager.h"
 #include "ll/api/mod/RegisterHelper.h"
 #include "ll/api/mod/ModManagerRegistry.h"
-#include "jni/java_Log.h"
 
 #include "jni.h"
 #include "ll/api/utils/StringUtils.h"
@@ -79,22 +75,25 @@ bool LJE::load() {
 
     
     // 注册native方法
-    register_native_methods(env);
+    //register_native_methods(env);
 
     // 启动 LeviLamina 类
     jclass jclass_File=env->FindClass("Ljava/io/File;");
+    jclass jclass_Logger=env->FindClass(JCLASS_LOGGER);
     jfieldID jfield_LeviLamina_modRootDir=env->GetStaticFieldID(jclass_LeviLamina, "modRootDir", "Ljava/io/File;");
     jfieldID jfield_LeviLamina_logger=env->GetStaticFieldID(jclass_LeviLamina, "logger", JCLASS_LOGGER);
-    jmethodID jfield_LeviLamina_init=env->GetStaticMethodID(jclass_LeviLamina, "init", "()V");
+    jmethodID jmethod_LeviLamina_init=env->GetStaticMethodID(jclass_LeviLamina, "init", "()V");
+    jmethodID jmethod_LeviLamina_load=env->GetStaticMethodID(jclass_LeviLamina, "load", "()V");
+    jmethodID jmethod_Logger_init=env->GetMethodID(jclass_Logger, "<init>", "(J)V");
 
     jstring jstring_native_path=env->NewStringUTF(ll::mod::getModsRoot().string().c_str());
     jobject jobject_native_modRootDir=env->NewObject(jclass_File, env->GetMethodID(jclass_File, "<init>", "(Ljava/lang/String;)V"), jstring_native_path);
-    jobject jobject_native_logger=lje::j_Logger::newLogger(env,&getSelf().getLogger());
+    jobject jobject_native_logger=env->NewObject(jclass_Logger, jmethod_Logger_init, (jlong)&getSelf().getLogger());
     env->SetStaticObjectField(jclass_LeviLamina, jfield_LeviLamina_logger, jobject_native_logger);
-    env->CallStaticVoidMethod(jclass_LeviLamina, jfield_LeviLamina_init);
-
-    env->DeleteLocalRef(jstring_native_path);
     env->SetStaticObjectField(jclass_LeviLamina, jfield_LeviLamina_modRootDir, jobject_native_modRootDir);
+    env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_init);
+    env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_load);
+    env->DeleteLocalRef(jstring_native_path);
     env->DeleteLocalRef(jobject_native_modRootDir);
     env->DeleteLocalRef(jobject_native_logger);
 
@@ -112,9 +111,7 @@ bool LJE::load() {
 
 bool LJE::enable() {
     JNIEnv* env=getEnv();
-    if(env==nullptr){
-        return false;
-    }
+
     jclass jclass_LeviLamina = env->FindClass(JCLASS_LEVILAMINA);
     jmethodID jmethod_enable=env->GetStaticMethodID(jclass_LeviLamina, "enable", "()V");
     env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_enable);
@@ -126,15 +123,13 @@ bool LJE::enable() {
 
 bool LJE::disable() {
     JNIEnv* env=getEnv();
-    if(env==nullptr){
-        return false;
-    }
     
     jclass jclass_LeviLamina = env->FindClass(JCLASS_LEVILAMINA);
     jmethodID jmethod_disable=env->GetStaticMethodID(jclass_LeviLamina, "disable", "()V");
     env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_disable);
 
     detachCurrentThread();
+    jvm->DestroyJavaVM();
 
     return true;
 }

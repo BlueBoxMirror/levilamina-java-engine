@@ -1,7 +1,6 @@
 #include "PluginManager.h"
 #include "Entry.h"
 #include <jni.h>
-#include "jni/plugin/java_LeviLamina.h"
 #include "ll/api/Expected.h"
 #include "ll/api/mod/Mod.h"
 #include "mod/Entry.h"

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ll/api/Expected.h"
 #include "ll/api/mod/ModManager.h"
 
 namespace lje{

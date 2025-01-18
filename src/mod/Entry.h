@@ -4,7 +4,7 @@
 #include "ll/api/mod/NativeMod.h"
 
 #include "jni.h"
-#include "util.h"
+#include "util/util.h"
 
 namespace lje {
 

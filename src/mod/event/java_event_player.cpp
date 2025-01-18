@@ -7,7 +7,7 @@
 #include "ll/api/event/player/PlayerAttackEvent.h"
 #include "ll/api/event/EventBus.h"
 #include "mod/Entry.h"
-#include "mod/util.h"
+#include "mod/util/util.h"
 
 namespace lje::event::player{
     void registerNatives(){

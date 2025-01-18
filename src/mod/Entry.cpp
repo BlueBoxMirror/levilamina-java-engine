@@ -77,6 +77,7 @@ bool LJE::load() {
     
     // 注册native事件
     lje::event::registerNatives();
+    
 
     // 启动 LeviLamina 类
     jclass jclass_File=env->FindClass("Ljava/io/File;");

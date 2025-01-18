@@ -1,7 +1,7 @@
 #pragma once
 
 #include <jni.h>
-#include "mod/util.h"
+#include "mod/util/util.h"
 
 #define JCLASS_Event PACK_JAVA_NAME("event/Event")
 #define JCLASS_EventBus PACK_JAVA_NAME("event/EventBus")

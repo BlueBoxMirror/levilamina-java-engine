@@ -11,47 +11,47 @@ if not has_config("vs_runtime") then
     set_runtimes("MD")
 end
 
-target("lje-jni-api")
-    add_cxflags(
-        "/EHa",
-        "/utf-8",
-        "/W4",
-        "/w44265",
-        "/w44289",
-        "/w44296",
-        "/w45263",
-        "/w44738",
-        "/w45204"
-    )
-    add_defines("NOMINMAX", "UNICODE")
-    add_files("jni/**.cpp")
-    add_includedirs("jni")
-    add_includedirs("$(env JAVA_HOME)/include")
-    add_includedirs("$(env JAVA_HOME)/include/win32")
-    add_links("jvm")
-    add_linkdirs("$(env JAVA_HOME)/lib")
-    add_packages("levilamina")
-    add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
-    set_exceptions("none") -- To avoid conflicts with /EHa.
-    set_kind("shared")
-    set_languages("c++20")
-    set_symbols("debug")
+-- target("lje-jni-api")
+--     add_cxflags(
+--         "/EHa",
+--         "/utf-8",
+--         "/W4",
+--         "/w44265",
+--         "/w44289",
+--         "/w44296",
+--         "/w45263",
+--         "/w44738",
+--         "/w45204"
+--     )
+--     add_defines("NOMINMAX", "UNICODE")
+--     add_files("jni/**.cpp")
+--     add_includedirs("jni")
+--     add_includedirs("$(env JAVA_HOME)/include")
+--     add_includedirs("$(env JAVA_HOME)/include/win32")
+--     add_links("jvm")
+--     add_linkdirs("$(env JAVA_HOME)/lib")
+--     add_packages("levilamina")
+--     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
+--     set_exceptions("none") -- To avoid conflicts with /EHa.
+--     set_kind("shared")
+--     set_languages("c++20")
+--     set_symbols("debug")
 
-    after_build(function (target)
-        local name="levilamina-java-engine"
-        local modFile=path.filename(target:targetfile())
-        local bindir = path.join(os.projectdir(), "bin")
-        local outputdir = path.join(bindir, name)
-        local targetfile = path.join(outputdir, modFile)
-        local pdbfile = path.join(outputdir, path.basename(modFile) .. ".pdb")
-        local oritargetfile = target:targetfile()
-        local oripdbfile = path.join(path.directory(oritargetfile), path.basename(oritargetfile) .. ".pdb")
-        os.mkdir(outputdir)
-        os.cp(oritargetfile, targetfile)
-        if os.isfile(oripdbfile) then
-            os.cp(oripdbfile, pdbfile)
-        end
-    end)
+--     after_build(function (target)
+--         local name="levilamina-java-engine"
+--         local modFile=path.filename(target:targetfile())
+--         local bindir = path.join(os.projectdir(), "bin")
+--         local outputdir = path.join(bindir, name)
+--         local targetfile = path.join(outputdir, modFile)
+--         local pdbfile = path.join(outputdir, path.basename(modFile) .. ".pdb")
+--         local oritargetfile = target:targetfile()
+--         local oripdbfile = path.join(path.directory(oritargetfile), path.basename(oritargetfile) .. ".pdb")
+--         os.mkdir(outputdir)
+--         os.cp(oritargetfile, targetfile)
+--         if os.isfile(oripdbfile) then
+--             os.cp(oripdbfile, pdbfile)
+--         end
+--     end)
 
 target("levilamina-java-engine") -- Change this to your mod name.
     add_cxflags(

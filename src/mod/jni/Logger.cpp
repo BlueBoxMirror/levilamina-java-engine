@@ -70,14 +70,7 @@ JNIEXPORT void JNICALL Java_bluebox_ll_Logger_warn
  * Method:    dispose
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_Logger_dispose
-  (JNIEnv *env, jobject thisObj){
-    jclass jclass_Logger=env->GetObjectClass(thisObj);
-    jfieldID jfield_isInStack=env->GetFieldID(jclass_Logger, "isInStack","Z");
-    jboolean isInStack=env->GetBooleanField(thisObj, jfield_isInStack);
-    if(!isInStack) return;
-    jfieldID jfield_nativePtr=env->GetFieldID(jclass_Logger, "nativePtr", "J");
-    Logger *logger=(Logger*)env->GetLongField(thisObj, jfield_nativePtr);
-    delete logger;
-    env->SetLongField(thisObj, jfield_nativePtr, 0);
+JNIEXPORT void JNICALL Java_bluebox_ll_Logger_release
+  (JNIEnv *, jclass, jlong nativePtr){
+    delete (Logger*)nativePtr;
   }

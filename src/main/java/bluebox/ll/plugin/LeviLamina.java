@@ -34,7 +34,7 @@ public class LeviLamina{
     private static void init(){
         System.setErr(getErrorStream());
         System.setOut(getOutputStream());
-        System.load(new File(getModRootDir(),"levilamina-java-engine/lje-jni-api.dll").getAbsolutePath());
+        System.load(new File(getModRootDir(),"levilamina-java-engine/levilamina-java-engine.dll").getAbsolutePath());
     }
 
 

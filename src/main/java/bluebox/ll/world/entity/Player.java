@@ -1,12 +1,12 @@
-package bluebox.ll.entity;
-
-import org.jetbrains.annotations.NotNull;
+package bluebox.ll.world.entity;
 
 public class Player extends Entity {
     protected Player(long ptr) {
         super(ptr);
     }
     public native String getRealName();
+
+    public native Player getUUID();
 
     public enum ChatType{
         Raw                    ,
@@ -22,10 +22,10 @@ public class Player extends Entity {
         TextObject             ,
         TextObjectAnnouncement
     }
-    public native void sendChat(String message,ChatType type);
-    public void sendChat(String message){
-        sendChat(message,ChatType.Raw);
+    public native void sendMessage(String message,ChatType type);
+    public void sendMessage(String message){
+        sendMessage(message,ChatType.Raw);
     }
-    public native void updateInventory();
+    public native void updateItems();
 
 }

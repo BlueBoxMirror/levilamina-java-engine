@@ -1,4 +1,4 @@
-package bluebox.ll.entity;
+package bluebox.ll.world.entity;
 
 import bluebox.ll.memory.PointerSupporter;
 import bluebox.ll.util.Angle;
@@ -65,7 +65,7 @@ public class Entity implements Comparable<Entity>, PointerSupporter {
     public void teleport(@NotNull Vector pos){
         teleport(pos.getX(),pos.getY(),pos.getZ(),this.getDimensionId());
     }
-
+    public native void updateItems();
 
 
     @Override

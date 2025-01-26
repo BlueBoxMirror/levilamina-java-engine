@@ -2,6 +2,9 @@ package bluebox.ll;
 
 import bluebox.ll.memory.PointerSupporter;
 import bluebox.ll.memory.Releaser;
+import bluebox.ll.world.entity.Player;
+
+import java.io.File;
 
 public class Logger implements PointerSupporter{
     private Logger(long nativePtr){
@@ -40,6 +43,11 @@ public class Logger implements PointerSupporter{
      */
     public native void warn(String message);
     private static native void release(long nativePtr);
+    public native void setFile(File file);
+    public native void setPlayer(String uuid);
+    public void setPlayer(Player player){
+        setPlayer(player.getUUID());
+    }
 
     @Override
     public long getNativePointer() {

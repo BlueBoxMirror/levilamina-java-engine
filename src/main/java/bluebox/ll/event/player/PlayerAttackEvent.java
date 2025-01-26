@@ -1,7 +1,7 @@
 package bluebox.ll.event.player;
 
-import bluebox.ll.entity.Entity;
-import bluebox.ll.entity.Player;
+import bluebox.ll.world.entity.Entity;
+import bluebox.ll.world.entity.Player;
 import bluebox.ll.event.Cancellable;
 
 public class PlayerAttackEvent extends PlayerEvent implements Cancellable {

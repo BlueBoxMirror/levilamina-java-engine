@@ -1,6 +1,6 @@
 package bluebox.ll.event.player;
 
-import bluebox.ll.entity.Player;
+import bluebox.ll.world.entity.Player;
 import bluebox.ll.event.Cancellable;
 
 

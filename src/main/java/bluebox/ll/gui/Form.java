@@ -1,10 +1,9 @@
 package bluebox.ll.gui;
 
-import bluebox.ll.entity.Player;
+import bluebox.ll.world.entity.Player;
 
 import java.util.function.Consumer;
 
-abstract public class Form {
-    public abstract void send(Player player, Consumer<ButtonEvent> callback);
-    public abstract void send(Player player);
+abstract public class Form<T> {
+    abstract public void sendTo(Player player, Consumer<FormEvent<T>> callback);
 }

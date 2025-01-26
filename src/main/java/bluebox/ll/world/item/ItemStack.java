@@ -1,4 +1,4 @@
-package bluebox.ll.item;
+package bluebox.ll.world.item;
 
 import bluebox.ll.memory.PointerSupporter;
 

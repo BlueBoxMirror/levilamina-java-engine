@@ -1,32 +1,22 @@
 package bluebox.ll.gui;
 
-import bluebox.ll.entity.Player;
-
-import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Button {
     public enum ImageType{
-        PATH("path"),
-        URL("url");
-        ImageType(String type){
-            this.type=type;
-        }
-        public final String type;
+        path,
+        url
     }
-    public Button(){
-        this.text="";
-        this.image="";
-        this.type=ImageType.PATH;
-        this.onClick=(e)->{};
-    }
-    public Button(String text, String image,ImageType type, Consumer<Player> onClick){
+    @NotNull public String text="";
+    @Nullable public String imagePath;
+    @NotNull public ImageType imageType=ImageType.path;
+    public Button(@NotNull String text, @Nullable String imagePath, @NotNull ImageType imageType){
         this.text=text;
-        this.image=image;
-        this.type=type;
-        this.onClick=onClick;
+        this.imagePath=imagePath;
+        this.imageType=imageType;
     }
-    public String text;
-    public ImageType type;
-    public String image;
-    public Consumer<Player> onClick;
+    public Button(@NotNull String text){
+        this.text=text;
+    }
 }

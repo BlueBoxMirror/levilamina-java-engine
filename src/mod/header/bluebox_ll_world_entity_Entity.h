@@ -113,38 +113,6 @@ JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_teleport__FFFI
 
 /*
  * Class:     bluebox_ll_world_entity_Entity
- * Method:    getEntities
- * Signature: ()[Lbluebox/ll/world/entity/Entity;
- */
-JNIEXPORT jobjectArray JNICALL Java_bluebox_ll_world_entity_Entity_getEntities
-  (JNIEnv *, jclass);
-
-/*
- * Class:     bluebox_ll_world_entity_Entity
- * Method:    getEntity
- * Signature: (J)Lbluebox/ll/world/entity/Entity;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_getEntity
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     bluebox_ll_world_entity_Entity
- * Method:    spawn
- * Signature: (Ljava/lang/String;Lbluebox/ll/util/Location;)Lbluebox/ll/world/entity/Entity;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_spawn
-  (JNIEnv *, jclass, jstring, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Entity
- * Method:    cloneTo
- * Signature: (Lbluebox/ll/util/Location;)Lbluebox/ll/world/entity/Entity;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_cloneTo
-  (JNIEnv *, jobject, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Entity
  * Method:    updateItems
  * Signature: ()V
  */

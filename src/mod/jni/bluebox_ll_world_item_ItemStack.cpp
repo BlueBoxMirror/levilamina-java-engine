@@ -81,26 +81,30 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_world_item_ItemStack_getTypeName
   }
 
 
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_setNBT
+JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_setNBT  //已删除
   (JNIEnv *, jobject, jobject);
 
-JNIEXPORT jboolean JNICALL Java_bluebox_ll_world_item_ItemStack_match
+JNIEXPORT jboolean JNICALL Java_bluebox_ll_world_item_ItemStack_match  //已删除
   (JNIEnv *, jobject, jobject);
 
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_isEmpty
+JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_isEmpty  //已删除
   (JNIEnv *, jobject);
 
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_set
+JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_set  //已删除
   (JNIEnv *, jobject, jobject);
 
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_clone
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_clone  //已删除
   (JNIEnv *, jobject);
 
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_getNBT
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_getNBT  //已删除
   (JNIEnv *, jobject);
 
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_delete
+JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_delete  //已删除
   (JNIEnv *, jobject);
+
+
+
+
 
 
 

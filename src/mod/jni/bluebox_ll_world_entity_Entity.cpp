@@ -168,17 +168,7 @@ JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_updateItems
   }
 
 
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_spawn
-  (JNIEnv *, jclass, jstring, jobject);
 
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_cloneTo
-  (JNIEnv *, jobject, jobject);
-
-JNIEXPORT jobjectArray JNICALL Java_bluebox_ll_world_entity_Entity_getEntities
-  (JNIEnv *, jclass);
-
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_getEntity
-  (JNIEnv *, jclass, jlong);
 
 
 

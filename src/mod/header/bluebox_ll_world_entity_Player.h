@@ -17,99 +17,19 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Player_getRealName
 
 /*
  * Class:     bluebox_ll_world_entity_Player
- * Method:    sendMessage
+ * Method:    getUUID
+ * Signature: ()Lbluebox/ll/world/entity/Player;
+ */
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Player_getUUID
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     bluebox_ll_world_entity_Player
+ * Method:    sendChat
  * Signature: (Ljava/lang/String;Lbluebox/ll/world/entity/Player/ChatType;)V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_sendMessage
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_sendChat
   (JNIEnv *, jobject, jstring, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    getHand
- * Signature: ()Lbluebox/ll/world/item/ItemStack;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Player_getHand
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    getOffHand
- * Signature: ()Lbluebox/ll/world/item/ItemStack;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Player_getOffHand
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    getOnlinePlayers
- * Signature: ()[Lbluebox/ll/world/entity/Player;
- */
-JNIEXPORT jobjectArray JNICALL Java_bluebox_ll_world_entity_Player_getOnlinePlayers
-  (JNIEnv *, jclass);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    getXUID
- * Signature: ()Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Player_getXUID
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    getUUID
- * Signature: ()Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Player_getUUID
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    isOperator
- * Signature: ()Z
- */
-JNIEXPORT jboolean JNICALL Java_bluebox_ll_world_entity_Player_isOperator
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    kick
- * Signature: (Ljava/lang/String;)Z
- */
-JNIEXPORT jboolean JNICALL Java_bluebox_ll_world_entity_Player_kick
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    setTitle
- * Signature: (Ljava/lang/String;Lbluebox/ll/world/entity/Player/TitleType;III)V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_setTitle
-  (JNIEnv *, jobject, jstring, jobject, jint, jint, jint);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    sendToast
- * Signature: (Ljava/lang/String;Ljava/lang/String;)V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_sendToast
-  (JNIEnv *, jobject, jstring, jstring);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    runCommand
- * Signature: (Ljava/lang/String;)V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_runCommand
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     bluebox_ll_world_entity_Player
- * Method:    talkAs
- * Signature: (Ljava/lang/String;)V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_talkAs
-  (JNIEnv *, jobject, jstring);
 
 /*
  * Class:     bluebox_ll_world_entity_Player

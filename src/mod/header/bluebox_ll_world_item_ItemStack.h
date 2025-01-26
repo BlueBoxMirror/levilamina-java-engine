@@ -63,62 +63,6 @@ JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_setCount
 JNIEXPORT jstring JNICALL Java_bluebox_ll_world_item_ItemStack_getTypeName
   (JNIEnv *, jobject);
 
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    clone
- * Signature: ()Lbluebox/ll/world/item/ItemStack;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_clone
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    delete
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_delete
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    isEmpty
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_isEmpty
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    set
- * Signature: (Lbluebox/ll/world/item/ItemStack;)V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_set
-  (JNIEnv *, jobject, jobject);
-
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    getNBT
- * Signature: ()Lbluebox/ll/util/nbt/TagCompound;
- */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_getNBT
-  (JNIEnv *, jobject);
-
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    setNBT
- * Signature: (Lbluebox/ll/util/nbt/TagCompound;)V
- */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_setNBT
-  (JNIEnv *, jobject, jobject);
-
-/*
- * Class:     bluebox_ll_world_item_ItemStack
- * Method:    match
- * Signature: (Lbluebox/ll/world/item/ItemStack;)Z
- */
-JNIEXPORT jboolean JNICALL Java_bluebox_ll_world_item_ItemStack_match
-  (JNIEnv *, jobject, jobject);
-
 #ifdef __cplusplus
 }
 #endif

@@ -1,4 +1,4 @@
-#include "../header/bluebox_ll_entity_Entity.h"
+#include "../header/bluebox_ll_world_entity_Entity.h"
 #include "../util/util.h"
 #include "../util/nbt/java_nbt.h"
 #include "../util/java_position.h"
@@ -10,7 +10,7 @@
 #include "mc/world/actor/Actor.h"
 #include "mc/server/commands/CommandUtils.h"
 
-JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Entity_getType
+JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Entity_getType
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     return env->NewStringUTF(actor->getTypeName().c_str());
@@ -21,7 +21,7 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Entity_getType
  * Method:    getUniqueId
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_bluebox_ll_entity_Entity_getUniqueId
+JNIEXPORT jlong JNICALL Java_bluebox_ll_world_entity_Entity_getUniqueId
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     return (jlong)actor->getOrCreateUniqueID().id;
@@ -32,7 +32,7 @@ JNIEXPORT jlong JNICALL Java_bluebox_ll_entity_Entity_getUniqueId
  * Method:    getName
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Entity_getName
+JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Entity_getName
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     return env->NewStringUTF(CommandUtils::getActorName(*actor).c_str());
@@ -43,7 +43,7 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Entity_getName
  * Method:    getNameTag
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Entity_getNameTag
+JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Entity_getNameTag
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     return env->NewStringUTF(actor->getNameTag().c_str());
@@ -54,7 +54,7 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_entity_Entity_getNameTag
  * Method:    setNameTag
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_setNameTag
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_setNameTag
   (JNIEnv *env, jobject thisObj, jstring jstr_name){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     const char* cstr_name = env->GetStringUTFChars(jstr_name, nullptr);
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_setNameTag
  * Method:    getNbt
  * Signature: ()Lbluebox/ll/util/nbt/TagCompound;
  */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_entity_Entity_getNbt
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_getNbt
   (JNIEnv *env, jobject jobj){
     Actor* actor = (Actor*)lje::getNativePointer(env, jobj);
     CompoundTag tag;
@@ -80,7 +80,7 @@ JNIEXPORT jobject JNICALL Java_bluebox_ll_entity_Entity_getNbt
  * Method:    setNbt
  * Signature: (Lbluebox/ll/util/nbt/TagCompound;)V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_setNbt
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_setNbt
   (JNIEnv *env, jobject thisObj, jobject jobj_tag){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     CompoundTag tag;
@@ -94,7 +94,7 @@ JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_setNbt
  * Method:    getLocation
  * Signature: ()Lbluebox/ll/util/Location;
  */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_entity_Entity_getLocation
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_getLocation
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     return lje::newLocation(env, &actor->getPosition(), actor->getDimensionId());
@@ -105,7 +105,7 @@ JNIEXPORT jobject JNICALL Java_bluebox_ll_entity_Entity_getLocation
  * Method:    kill
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_kill
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_kill
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     actor->kill();
@@ -116,7 +116,7 @@ JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_kill
  * Method:    getFeetLocation
  * Signature: ()Lbluebox/ll/util/Location;
  */
-JNIEXPORT jobject JNICALL Java_bluebox_ll_entity_Entity_getFeetLocation
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_getFeetLocation
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     Vec3 pos = actor->getFeetPos();
@@ -128,7 +128,7 @@ JNIEXPORT jobject JNICALL Java_bluebox_ll_entity_Entity_getFeetLocation
  * Method:    getDimensionId
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_bluebox_ll_entity_Entity_getDimensionId
+JNIEXPORT jint JNICALL Java_bluebox_ll_world_entity_Entity_getDimensionId
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     return actor->getDimensionId();
@@ -139,7 +139,7 @@ JNIEXPORT jint JNICALL Java_bluebox_ll_entity_Entity_getDimensionId
  * Method:    teleport
  * Signature: (FFFIFF)V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_teleport__FFFIFF
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_teleport__FFFIFF
   (JNIEnv *env, jobject thisObj, jfloat x, jfloat y, jfloat z, jint dimId, jfloat yaw, jfloat pitch){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     actor->teleport({x,y,z},dimId,{yaw,pitch});
@@ -150,8 +150,39 @@ JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_teleport__FFFIFF
  * Method:    teleport
  * Signature: (FFFI)V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_entity_Entity_teleport__FFFI
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_teleport__FFFI
   (JNIEnv *env, jobject thisObj, jfloat x, jfloat y, jfloat z, jint dimId){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     actor->teleport({x,y,z},dimId);
   }
+
+/*
+ * Class:     bluebox_ll_world_entity_Entity
+ * Method:    updateItems
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_updateItems
+  (JNIEnv *env, jobject thisObj){
+    Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
+    actor->refreshComponents();
+  }
+
+
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_spawn
+  (JNIEnv *, jclass, jstring, jobject);
+
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_cloneTo
+  (JNIEnv *, jobject, jobject);
+
+JNIEXPORT jobjectArray JNICALL Java_bluebox_ll_world_entity_Entity_getEntities
+  (JNIEnv *, jclass);
+
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Entity_getEntity
+  (JNIEnv *, jclass, jlong);
+
+
+
+
+
+
+

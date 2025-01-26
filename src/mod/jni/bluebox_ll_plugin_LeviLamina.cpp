@@ -28,3 +28,12 @@ JNIEXPORT jobject JNICALL Java_bluebox_ll_plugin_LeviLamina_getNativePlugin
     jobject jobject_plugin=env->NewObject(jclass_OtherPlugin, jmethod_init, jstr_name, lje::newLogger(env, &mod->getLogger()));
     return jobject_plugin;
   }
+
+
+
+
+
+
+
+
+

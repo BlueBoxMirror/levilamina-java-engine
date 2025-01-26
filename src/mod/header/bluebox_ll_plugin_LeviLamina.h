@@ -23,7 +23,6 @@ JNIEXPORT jboolean JNICALL Java_bluebox_ll_plugin_LeviLamina_hasPlugin
 JNIEXPORT jobject JNICALL Java_bluebox_ll_plugin_LeviLamina_getNativePlugin
   (JNIEnv *, jclass, jstring);
 
-
 #ifdef __cplusplus
 }
 #endif

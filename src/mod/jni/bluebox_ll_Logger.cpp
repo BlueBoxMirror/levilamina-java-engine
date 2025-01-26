@@ -1,6 +1,11 @@
 #include "../header/bluebox_ll_Logger.h"
+#include "../util/util.h"
 
+#include "jni.h"
+#include "ll/api/service/Bedrock.h"
+#include "mc/world/level/Level.h"
 #include "ll/api/Logger.h"
+#include <filesystem>
 
 using ll::Logger;
 
@@ -74,3 +79,37 @@ JNIEXPORT void JNICALL Java_bluebox_ll_Logger_release
   (JNIEnv *, jclass, jlong nativePtr){
     delete (Logger*)nativePtr;
   }
+
+
+
+JNIEXPORT void JNICALL Java_bluebox_ll_Logger_setPlayer
+  (JNIEnv *env, jobject thisObj, jstring jstr_playerName){
+    Logger *logger=(Logger*) lje::getNativePointer(env, thisObj);
+    const char* playerUUID=env->GetStringUTFChars(jstr_playerName, nullptr);
+    logger->setPlayerOutputFunc([playerUUID](std::string_view message){
+      ll::service::getLevel()->getPlayer(playerUUID)->sendMessage(message);
+    });
+    
+    env->ReleaseStringUTFChars(jstr_playerName, playerUUID);
+  }
+
+JNIEXPORT void JNICALL Java_bluebox_ll_Logger_setFile
+  (JNIEnv *env, jobject thisObj, jobject jobj_file){
+    jclass jcls_File=env->FindClass("Ljava/io/File;");
+    jmethodID jmid_getAbsolutePath=env->GetMethodID(jcls_File, "getAbsolutePath", "()Ljava/lang/String;");
+    
+    jstring jstrN_path=(jstring)env->CallObjectMethod(jobj_file, jmid_getAbsolutePath);
+    const char* path=env->GetStringUTFChars(jstrN_path, nullptr);
+    Logger *logger=(Logger*) lje::getNativePointer(env, thisObj);
+    logger->setFile(std::filesystem::path(path));
+
+    env->ReleaseStringUTFChars(jstrN_path, path);
+    env->DeleteLocalRef(jstrN_path);
+  }
+
+
+
+
+
+
+

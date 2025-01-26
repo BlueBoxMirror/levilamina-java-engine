@@ -55,6 +55,22 @@ JNIEXPORT void JNICALL Java_bluebox_ll_Logger_warn
 JNIEXPORT void JNICALL Java_bluebox_ll_Logger_release
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     bluebox_ll_Logger
+ * Method:    setFile
+ * Signature: (Ljava/io/File;)V
+ */
+JNIEXPORT void JNICALL Java_bluebox_ll_Logger_setFile
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     bluebox_ll_Logger
+ * Method:    setPlayer
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_bluebox_ll_Logger_setPlayer
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif

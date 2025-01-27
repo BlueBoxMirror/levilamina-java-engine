@@ -1,12 +1,14 @@
 package bluebox.ll.world.entity;
 
+import java.util.UUID;
+
 public class Player extends Entity {
     protected Player(long ptr) {
         super(ptr);
     }
     public native String getRealName();
 
-    public native Player getUUID();
+    public native UUID getUUID();
 
     public enum ChatType{
         Raw                    ,

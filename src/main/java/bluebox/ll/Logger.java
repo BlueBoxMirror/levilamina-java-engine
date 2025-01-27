@@ -43,11 +43,6 @@ public class Logger implements PointerSupporter{
      */
     public native void warn(String message);
     private static native void release(long nativePtr);
-    public native void setFile(File file);
-    public native void setPlayer(String uuid);
-    public void setPlayer(Player player){
-        setPlayer(player.getUUID());
-    }
 
     @Override
     public long getNativePointer() {

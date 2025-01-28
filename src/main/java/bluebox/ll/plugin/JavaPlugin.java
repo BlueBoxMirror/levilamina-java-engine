@@ -17,6 +17,7 @@ abstract public class JavaPlugin implements Plugin{
     private PrintStream errStream;
     private Manifest manifest;
     private File modDir;
+    private URLClassLoader classLoader;
     private boolean isInit=false;
     public final Manifest getManifest(){
         return manifest;
@@ -43,12 +44,16 @@ abstract public class JavaPlugin implements Plugin{
         throw new UnsupportedOperationException("onUnload() is not implemented");
     }
     abstract protected void onDisable();
-    protected static void init(JavaPlugin plugin, Manifest manifest){
+    protected static void init(JavaPlugin plugin, Manifest manifest,URLClassLoader classLoader){
         if(plugin.isInit) throw new RuntimeException("Plugin is already initialized");
         plugin.isInit=true;
         plugin.manifest=manifest;
         plugin.modDir=new File(LeviLamina.getModRootDir(),manifest.entry);
         plugin.logger=new Logger(manifest.name);
         plugin.errStream=new PrintStream(new LoggerStream(plugin.logger,LoggerStream.PrintMode.ERROR),true);
+        plugin.classLoader=classLoader;
+    }
+    public final URLClassLoader getClassLoader(){
+        return classLoader;
     }
 }

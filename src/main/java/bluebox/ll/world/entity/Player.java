@@ -1,5 +1,6 @@
 package bluebox.ll.world.entity;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Player extends Entity {
@@ -29,5 +30,6 @@ public class Player extends Entity {
         sendMessage(message,ChatType.Raw);
     }
     public native void updateItems();
+    public static native ArrayList<Player> getOnline();
 
 }

@@ -12,7 +12,7 @@ public class CustomForm extends Form<ArrayList<Object>>{
     @Override
     public native void sendTo(Player player, Consumer<FormEvent<ArrayList<Object>>> callback);
     @NotNull public String title="";
-    public final LinkedList<CustomElement> elements = new LinkedList<>();
+    protected final LinkedList<CustomElement> elements = new LinkedList<>();
     public CustomForm() {}
     public CustomForm(@NotNull String title) {
         this.title = title;
@@ -23,6 +23,7 @@ public class CustomForm extends Form<ArrayList<Object>>{
     public void addLabel(@NotNull String text){
         add(new Label(text));
     }
+
     public void addInput(@NotNull String title){
         addInput(title,"","");
     }
@@ -32,6 +33,7 @@ public class CustomForm extends Form<ArrayList<Object>>{
     public void addInput(@NotNull String title, @NotNull String defaultValue, @NotNull String placeholder){
         add(new Input(title,defaultValue,placeholder));
     }
+
     public void addDropdown(@NotNull String title,@NotNull ArrayList<String> options){
         add(new DropDown(title,options));
     }
@@ -44,12 +46,14 @@ public class CustomForm extends Form<ArrayList<Object>>{
     public void addDropdown(@NotNull String title, @NotNull String[] options, int defaultIndex){
         addDropdown(title,new ArrayList<>(List.of(options)),defaultIndex);
     }
+
     public void addToggle(@NotNull String title, boolean defaultValue){
         add(new Toggle(title,defaultValue));
     }
     public void addToggle(@NotNull String title){
         addToggle(title,false);
     }
+
     public void addSlider(@NotNull String title, double min, double max, double step, double defaultValue){
         add(new Slider(title,min,max,step,defaultValue));
     }
@@ -59,6 +63,7 @@ public class CustomForm extends Form<ArrayList<Object>>{
     public void addSlider(@NotNull String title, double min, double max, double step){
         addSlider(title,min,max,step,min);
     }
+
     public void addTextSlider(@NotNull String title,@NotNull ArrayList<String> options){
         add(new TextSlider(title,options));
     }

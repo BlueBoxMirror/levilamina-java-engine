@@ -27,6 +27,7 @@ public class LeviLamina{
     private static File modRootDir;
     private static Logger logger;
     private static URLClassLoader classLoader;
+    private static boolean isPreloaded=false;
     public static ClassLoader getClassLoader(){
         return classLoader;
     }
@@ -66,12 +67,17 @@ public class LeviLamina{
             if(manifest.entryClass==null){
                 throw new IllegalArgumentException("Entry class not specified in manifest,you need to specify it at manifest.json/entryClass");
             }
+            if(manifest.isLibrary && isPreloaded && !preloadMods.containsKey(manifest.name)){
+                throw new IllegalArgumentException("Library plugin can only loaded at first time");
+            }
 
+            URLClassLoader classLoader=manifest.isLibrary?LeviLamina.classLoader:new URLClassLoader(new URL[]{new File(modDir,manifest.entry).toURI().toURL()},LeviLamina.class.getClassLoader());
             Class<JavaPlugin> pluginClass=(Class<JavaPlugin>) classLoader.loadClass(manifest.entryClass);
             Constructor<JavaPlugin> pluginConstructor= pluginClass.getConstructor();
             JavaPlugin plugin=pluginConstructor.newInstance();
-            JavaPlugin.init(plugin,manifest);
+            JavaPlugin.init(plugin,manifest,classLoader);
             plugin.onLoad();
+            if(isPreloaded) plugin.onEnable();
             getLogger().info("Loading plugin "+manifest.name);
             mods.put(manifest.name,plugin);
         } catch (Exception e) {
@@ -92,7 +98,7 @@ public class LeviLamina{
                     File entryFile=new File(dir,manifest.entry);
                     if(!entryFile.exists() || !entryFile.isFile()) continue;
                     preloadMods.put(manifest.name,manifest);
-                    urls.add(entryFile.toURI().toURL());
+                    if(manifest.isLibrary) urls.add(entryFile.toURI().toURL());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -102,6 +108,7 @@ public class LeviLamina{
     }
 
     private static void enable(){
+        isPreloaded=true;
         for (JavaPlugin plugin : mods.values().toArray(new JavaPlugin[0])) {
             try {
                 plugin.onEnable();

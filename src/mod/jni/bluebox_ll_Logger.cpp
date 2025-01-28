@@ -4,16 +4,17 @@
 #include "jni.h"
 #include "ll/api/service/Bedrock.h"
 #include "mc/world/level/Level.h"
-#include "ll/api/Logger.h"
+#include "ll/api/io/Logger.h"
+#include "ll/api/io/LoggerRegistry.h"
 #include <filesystem>
 
-using ll::Logger;
+using namespace ll::io;
 
 JNIEXPORT void JNICALL Java_bluebox_ll_Logger_init
   (JNIEnv *env, jobject thisObj, jstring jstr_tag){
     jfieldID jfield_nativePtr=env->GetFieldID(env->GetObjectClass(thisObj), "nativePtr", "J");
     const char* tag=env->GetStringUTFChars(jstr_tag, nullptr);
-    Logger *logger=new Logger(tag);
+    Logger *logger=&*LoggerRegistry::getInstance().getOrCreate(tag);
     env->SetLongField(thisObj, jfield_nativePtr, (jlong)logger);
     env->ReleaseStringUTFChars(jstr_tag, tag);
   }
@@ -77,43 +78,8 @@ JNIEXPORT void JNICALL Java_bluebox_ll_Logger_warn
  */
 JNIEXPORT void JNICALL Java_bluebox_ll_Logger_release
   (JNIEnv *, jclass, jlong nativePtr){
-    delete (Logger*)nativePtr;
+    Logger* logger=(Logger*)nativePtr;
+    LoggerRegistry::getInstance().erase(logger->getTitle());
   }
-
-
-
-JNIEXPORT void JNICALL Java_bluebox_ll_Logger_setPlayer
-  (JNIEnv *env, jobject thisObj, jstring jstr_playerName){
-    Logger *logger=(Logger*) lje::getNativePointer(env, thisObj);
-    const char* playerUUID=env->GetStringUTFChars(jstr_playerName, nullptr);
-    logger->setPlayerOutputFunc([playerUUID](std::string_view message){
-      ll::service::getLevel()->getPlayer(playerUUID)->sendMessage(message);
-    });
-    
-    env->ReleaseStringUTFChars(jstr_playerName, playerUUID);
-  }
-
-JNIEXPORT void JNICALL Java_bluebox_ll_Logger_setFile
-  (JNIEnv *env, jobject thisObj, jobject jobj_file){
-    jclass jcls_File=env->FindClass("Ljava/io/File;");
-    jmethodID jmid_getAbsolutePath=env->GetMethodID(jcls_File, "getAbsolutePath", "()Ljava/lang/String;");
-    
-    jstring jstrN_path=(jstring)env->CallObjectMethod(jobj_file, jmid_getAbsolutePath);
-    const char* path=env->GetStringUTFChars(jstrN_path, nullptr);
-    Logger *logger=(Logger*) lje::getNativePointer(env, thisObj);
-    logger->setFile(std::filesystem::path(path));
-
-    env->ReleaseStringUTFChars(jstrN_path, path);
-    env->DeleteLocalRef(jstrN_path);
-  }
-
-
-
-
-
-
-
-
-
 
 

@@ -1,7 +1,6 @@
 #include "../header/bluebox_ll_gui_ButtonForm.h"
 #include "../Entry.h"
 #include "jni.h"
-#include "mc/enums/ModalFormCancelReason.h"
 #include "mc/world/actor/player/Player.h"
 #include "ll/api/form/SimpleForm.h"
 #include <cstring>
@@ -27,8 +26,8 @@ JNIEXPORT void JNICALL Java_bluebox_ll_gui_ButtonForm_sendTo
       jclass jcls_Button=env->FindClass(JCLASS_Button);
       jclass jcls_Enum=env->FindClass("Ljava/lang/Enum;");
       jfieldID jfid_Button_text=env->GetFieldID(jcls_Button, "text", "Ljava/lang/String;");
-      jfieldID jfid_Button_imagePath=env->GetFieldID(jcls_Button, "image", "Ljava/lang/String;");
-      jfieldID jfid_Button_imageType=env->GetFieldID(jcls_Button, "type", JCLASS_ImageType);
+      jfieldID jfid_Button_imagePath=env->GetFieldID(jcls_Button, "imagePath", "Ljava/lang/String;");
+      jfieldID jfid_Button_imageType=env->GetFieldID(jcls_Button, "imageType", JCLASS_ImageType);
       jmethodID jmid_Enum_name=env->GetMethodID(jcls_Enum, "name", "()Ljava/lang/String;");
       
       jstring jstr_text = (jstring)env->GetObjectField(jobj_button, jfid_Button_text);
@@ -43,7 +42,7 @@ JNIEXPORT void JNICALL Java_bluebox_ll_gui_ButtonForm_sendTo
       if(strlen(imagePath)==0) form.appendButton(text);
       else form.appendButton(text, imagePath, imageType);
       env->ReleaseStringUTFChars(jstr_text, text);
-      env->ReleaseStringUTFChars(jstr_imagePath, imagePath);
+      if(jstr_imagePath!=nullptr)env->ReleaseStringUTFChars(jstr_imagePath, imagePath);
       env->ReleaseStringUTFChars(jstr_imageType, imageType);
       env->DeleteLocalRef(jstr_text);
       env->DeleteLocalRef(jstr_imagePath);
@@ -74,8 +73,5 @@ JNIEXPORT void JNICALL Java_bluebox_ll_gui_ButtonForm_sendTo
     env->DeleteLocalRef(jobj_buttons);
 
   }
-
-
-
 
 

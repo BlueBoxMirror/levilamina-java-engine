@@ -2,7 +2,7 @@
 #include "../Entry.h"
 
 #include "jni.h"
-#include "mc/enums/ModalFormCancelReason.h"
+#include "mc/network/packet/ModalFormCancelReason.h"
 #include "mc/world/actor/player/Player.h"
 #include "ll/api/form/ModalForm.h"
 #include <optional>
@@ -32,15 +32,17 @@ JNIEXPORT void JNICALL Java_bluebox_ll_gui_ModalForm_sendTo
       JNIEnv *env=lje::getEnv();
       jclass jcls_Boolean=env->FindClass("java/lang/Boolean");
       jmethodID jmid_Boolean_valueOf=env->GetStaticMethodID(jcls_Boolean,"valueOf","(Z)Ljava/lang/Boolean;");
-      jboolean jbool_result=result.has_value();
-      jobject jobj_result=env->CallStaticObjectMethod(jcls_Boolean,jmid_Boolean_valueOf,jbool_result);
       jobject jobj_event=nullptr;
-      if(result.has_value()) jobj_event=lje::newFormEvent(env, &player, jobj_result);
+      if(result.has_value()) {
+        jboolean jbool_result=result.value() == ll::form::ModalFormSelectedButton::Upper;
+        jobject jobj_result=env->CallStaticObjectMethod(jcls_Boolean,jmid_Boolean_valueOf,jbool_result);
+        jobj_event=lje::newFormEvent(env, &player, jobj_result);
+        env->DeleteLocalRef(jobj_result);
+      }
       else jobj_event=lje::newFormEvent(env, &player, cancelReason.value());
       env->CallVoidMethod(jobjG_callback,jmid_accept,jobj_event);
       env->DeleteGlobalRef(jobjG_callback);
       env->DeleteLocalRef(jobj_event);
-      env->DeleteLocalRef(jobj_result);
       lje::detachCurrentThread();
     });
     env->ReleaseStringUTFChars(jstr_title,title);
@@ -53,11 +55,5 @@ JNIEXPORT void JNICALL Java_bluebox_ll_gui_ModalForm_sendTo
     env->DeleteLocalRef(jstr_confirmButtonText);
     env->DeleteLocalRef(jstr_cancelButtonText);
   }
-
-
-
-
-
-
 
 

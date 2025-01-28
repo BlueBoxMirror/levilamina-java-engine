@@ -1,25 +1,22 @@
-#include <iostream>
 #include <memory>
 #include <string>
+#include "Config.h"
 
 #include "Entry.h"
 #include "PluginManager.h"
 #include "event/java_event.h"
-#include "ll/api/Expected.h"
-#include "ll/api/Logger.h"
 #include "ll/api/mod/Mod.h"
 #include "ll/api/mod/ModManager.h"
 #include "ll/api/mod/RegisterHelper.h"
 #include "ll/api/mod/ModManagerRegistry.h"
+#include "ll/api/Config.h"
 
 #include "jni.h"
-#include "ll/api/utils/StringUtils.h"
 
 namespace lje {
 
 LJE_Manager ljeManage;
 std::shared_ptr<LJE_Manager> pluginManager;
-std::unique_ptr<LJE> instance;
 JavaVM* jvm=nullptr;
 
 void detachCurrentThread(){
@@ -37,24 +34,46 @@ JNIEnv* getEnv(){
 
 
 
-LJE& LJE::getInstance() { return *instance; }
+LJE& LJE::getInstance() { 
+    static LJE instance;
+    return instance;
+}
 
 LJE_Manager& LJE::getPluginManager() { return *pluginManager; }
 
 bool LJE::load() {
     using namespace std;
 
+    Config config;
+    auto const& configPath=getSelf().getConfigDir()/"config.json";
+    try{
+        ll::config::loadConfig(config,configPath);
+    }catch(...){}
+    ll::config::saveConfig(config, configPath);
+
     JNIEnv* env=nullptr;
     jvm=nullptr;
-    std::string option = ("-Djava.class.path=" + getSelf().getModDir().string() + "/LeviLaminaJavaEngine.jar");
-    option=ll::string_utils::replaceAll(option,"/","\\");
-    getSelf().getLogger().info("JVM option: " + option);
-    
-    JavaVMOption options[1];
+    string fileOption = ("-Djava.class.path=" + getSelf().getModDir().string() + "/LeviLaminaJavaEngine.jar");
+    vector<string> optionList={fileOption};
+    getSelf().getLogger().info("JVM options: ");
+    getSelf().getLogger().info(fileOption);
+    for(string option:config.jvmOption){
+        optionList.push_back(option);
+        getSelf().getLogger().info(option);
+    }
+    if(config.isDebug) for(string option:config.debugJvmOption){
+        optionList.push_back(option);
+        getSelf().getLogger().info(option);
+    }
+
+    JavaVMOption* options=new JavaVMOption[optionList.size()];
+    for(int i=0;i<optionList.size();i++){
+        options[i].optionString=(char*) optionList[i].c_str();
+    }
+
     JavaVMInitArgs vm_args;
-    options[0].optionString = (char*) option.c_str();
+    vm_args.nOptions=optionList.size();
     vm_args.version = JNI_VERSION_1_8;
-    vm_args.nOptions = 1;
     vm_args.options = options;
     vm_args.ignoreUnrecognized = JNI_FALSE;
 
@@ -147,5 +166,5 @@ bool LJE::unload(){
 
 } // namespace my_mod
 
-LL_REGISTER_MOD(lje::LJE, lje::instance);
+LL_REGISTER_MOD(lje::LJE, lje::LJE::getInstance());
 

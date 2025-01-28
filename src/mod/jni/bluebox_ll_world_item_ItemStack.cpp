@@ -1,6 +1,6 @@
 #include "../header/bluebox_ll_world_item_ItemStack.h"
 #include "../util/util.h"
-#include "mc/world/item/registry/ItemStack.h"  
+#include "mc/safety/RedactableString.h"
 /*  
  * Class:     bluebox_ll_world_item_ItemStack  
  * Method:    getCustomName
@@ -43,7 +43,8 @@ JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_setCustomName
   (JNIEnv *env, jobject thisObj, jstring jstr_name){
     ItemStack* item=(ItemStack*)lje::getNativePointer(env, thisObj);
     const char* name=env->GetStringUTFChars(jstr_name, NULL);
-    item->setCustomName(name);
+    
+    item->setCustomName(Bedrock::Safety::RedactableString(name));
     env->ReleaseStringUTFChars(jstr_name, name);
   }
 
@@ -79,36 +80,5 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_world_item_ItemStack_getTypeName
     ItemStack* item=(ItemStack*)lje::getNativePointer(env, thisObj);
     return env->NewStringUTF(item->getTypeName().c_str());
   }
-
-
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_setNBT  //已删除
-  (JNIEnv *, jobject, jobject);
-
-JNIEXPORT jboolean JNICALL Java_bluebox_ll_world_item_ItemStack_match  //已删除
-  (JNIEnv *, jobject, jobject);
-
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_isEmpty  //已删除
-  (JNIEnv *, jobject);
-
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_set  //已删除
-  (JNIEnv *, jobject, jobject);
-
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_clone  //已删除
-  (JNIEnv *, jobject);
-
-JNIEXPORT jobject JNICALL Java_bluebox_ll_world_item_ItemStack_getNBT  //已删除
-  (JNIEnv *, jobject);
-
-JNIEXPORT void JNICALL Java_bluebox_ll_world_item_ItemStack_delete  //已删除
-  (JNIEnv *, jobject);
-
-
-
-
-
-
-
-
-
 
 

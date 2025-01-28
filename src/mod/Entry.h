@@ -20,7 +20,7 @@ public:
 
     static LJE& getInstance();
 
-    LJE(ll::mod::NativeMod& self) : mSelf(self) {}
+    LJE() : mSelf(*ll::mod::NativeMod::current()) {}
 
     [[nodiscard]] ll::mod::NativeMod& getSelf() const { return mSelf; }
 

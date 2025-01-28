@@ -4,11 +4,12 @@
 #include "../util/java_position.h"
 
 #include "mc/dataloadhelper/DefaultDataLoadHelper.h"
-#include "mc/math/Vec3.h"
-#include "mc/math/Vec2.h"
+#include "mc/deps/core/math/Vec3.h"
+#include "mc/deps/core/math/Vec2.h"
 #include "mc/nbt/CompoundTag.h"
 #include "mc/world/actor/Actor.h"
 #include "mc/server/commands/CommandUtils.h"
+#include "mc/common/ActorUniqueID.h"
 
 JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Entity_getType
   (JNIEnv *env, jobject thisObj){
@@ -24,7 +25,7 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Entity_getType
 JNIEXPORT jlong JNICALL Java_bluebox_ll_world_entity_Entity_getUniqueId
   (JNIEnv *env, jobject thisObj){
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
-    return (jlong)actor->getOrCreateUniqueID().id;
+    return actor->getOrCreateUniqueID().rawID;
   }
 
 /*
@@ -166,13 +167,5 @@ JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Entity_updateItems
     Actor* actor = (Actor*)lje::getNativePointer(env, thisObj);
     actor->refreshComponents();
   }
-
-
-
-
-
-
-
-
 
 

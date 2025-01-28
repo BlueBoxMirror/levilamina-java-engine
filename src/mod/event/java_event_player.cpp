@@ -1,7 +1,7 @@
 #include "java_event_player.h"
 #include "java_event.h"
 #include "jni.h"
-#include "ll/api/event/player/PlayerLeaveEvent.h"
+#include "ll/api/event/player/PlayerDisconnectEvent.h"
 #include "ll/api/event/player/PlayerJoinEvent.h"
 #include "ll/api/event/player/PlayerConnectEvent.h"
 #include "ll/api/event/player/PlayerAttackEvent.h"
@@ -31,7 +31,7 @@ namespace lje::event::player{
             if(isCancelled) event.cancel();
             detachCurrentThread();
         });
-        eventBus.emplaceListener<PlayerLeaveEvent>([](PlayerLeaveEvent& event){
+        eventBus.emplaceListener<PlayerDisconnectEvent>([](PlayerDisconnectEvent& event){
             JNIEnv* env=getEnv();
             Player* player=&event.self();
             jobject jobj_event=newPlayerLeaveEvent(env, player);

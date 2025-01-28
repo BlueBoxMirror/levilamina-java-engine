@@ -18,17 +18,17 @@ JNIEXPORT jstring JNICALL Java_bluebox_ll_world_entity_Player_getRealName
 /*
  * Class:     bluebox_ll_world_entity_Player
  * Method:    getUUID
- * Signature: ()Lbluebox/ll/world/entity/Player;
+ * Signature: ()Ljava/util/UUID;
  */
 JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Player_getUUID
   (JNIEnv *, jobject);
 
 /*
  * Class:     bluebox_ll_world_entity_Player
- * Method:    sendChat
+ * Method:    sendMessage
  * Signature: (Ljava/lang/String;Lbluebox/ll/world/entity/Player/ChatType;)V
  */
-JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_sendChat
+JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_sendMessage
   (JNIEnv *, jobject, jstring, jobject);
 
 /*
@@ -38,6 +38,14 @@ JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_sendChat
  */
 JNIEXPORT void JNICALL Java_bluebox_ll_world_entity_Player_updateItems
   (JNIEnv *, jobject);
+
+/*
+ * Class:     bluebox_ll_world_entity_Player
+ * Method:    getOnline
+ * Signature: ()Ljava/util/ArrayList;
+ */
+JNIEXPORT jobject JNICALL Java_bluebox_ll_world_entity_Player_getOnline
+  (JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }

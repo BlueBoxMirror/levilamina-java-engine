@@ -1,7 +1,7 @@
 #pragma once
 
 #include <jni.h>
-#include "mc/math/Vec3.h"
+#include "mc/deps/core/math/Vec3.h"
 #include "util.h"
 
 #define JCLASS_VECTOR PACK_JAVA_NAME("util/Vector")

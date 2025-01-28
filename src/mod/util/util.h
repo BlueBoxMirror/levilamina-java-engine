@@ -1,7 +1,7 @@
 #pragma once
 #include "jni.h"
 
-#include "mc/enums/ModalFormCancelReason.h"
+#include "mc/network/packet/ModalFormCancelReason.h"
 #include "mc/world/actor/player/Player.h"
 #include "mc/world/actor/Actor.h"
 
@@ -20,6 +20,7 @@
 #define JCLASS_CustomElement PACK_JAVA_NAME("gui/CustomElement")
 #define JCLASS_FormEvent PACK_JAVA_NAME("gui/FormEvent")
 #define JCLASS_FormCancelReason PACK_JAVA_NAME("gui/FormEvent$CancelReason")
+#define JCLASS_CustomElement PACK_JAVA_NAME("gui/CustomElement")
 
 
 namespace lje{

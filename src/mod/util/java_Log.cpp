@@ -1,5 +1,5 @@
 #include "jni.h"
-#include "ll/api/Logger.h"
+#include "ll/api/io/Logger.h"
 #include "java_Log.h"
 #include "util.h"
 
@@ -17,7 +17,7 @@ jobject newLogger(JNIEnv *env, const char* name){
     return jobj_Logger;
 }
 
-jobject newLogger(JNIEnv *env,const ll::Logger* logger){
+jobject newLogger(JNIEnv *env,const ll::io::Logger* logger){
     jclass jclass_Logger=env->FindClass(JCLASS_Logger);
     jmethodID jmethod_Logger_init=env->GetMethodID(jclass_Logger, "<init>", "(J)V");
     jobject jobj_Logger=env->NewObject(jclass_Logger, jmethod_Logger_init, (jlong)logger);

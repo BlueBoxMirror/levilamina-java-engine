@@ -30,14 +30,3 @@ JNIEXPORT jobject JNICALL Java_bluebox_ll_plugin_LeviLamina_getNativePlugin
   }
 
 
-
-
-
-
-
-
-
-
-
-
-

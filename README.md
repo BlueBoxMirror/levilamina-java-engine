@@ -1,4 +1,5 @@
 # LeviLamina Java Engine (未完工)
+### 目前因学业原因暂停直至6月 
 
 这个模组是用来加载LeviLamina Java插件用的
 

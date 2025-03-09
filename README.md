@@ -10,3 +10,7 @@
  * JDK 版本至少 17
  * 环境变量包含 %JAVA_HOME%\bin\server\jvm.dll
 
+#### ~~画的饼~~
+ - [ ] jnihelper（提升我的开发效率）
+ - [ ] lje（之后再细分吧qwq）
+

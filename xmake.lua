@@ -33,8 +33,8 @@ target("levilamina-java-engine") -- Change this to your mod name.
     set_kind("shared")
     set_languages("c++20")
     set_symbols("debug")
-    add_files("src/**.cpp")
-    add_includedirs("src")
+    add_files("src/cpp/**.cpp")
+    add_includedirs("src/cpp")
 
     add_includedirs("$(env JAVA_HOME)/include")
     add_includedirs("$(env JAVA_HOME)/include/win32")

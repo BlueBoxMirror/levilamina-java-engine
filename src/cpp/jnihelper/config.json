@@ -1,0 +1,13 @@
+{
+  "headerFolder": "../../../build/generated/sources/headers/java/main",
+  "jarFile": "../../../bin/levilamina-java-engine/LeviLaminaJavaEngine.jar",
+  "outputFolder": "",
+  "includePath": "jnihelper",
+  "proxyClasses": [
+    "java.lang.String",
+    "bluebox.ll.plugin.LeviLamina",
+    "java.io.File",
+    "bluebox.ll.Logger",
+    "bluebox.ll.plugin.OtherPlugin"
+  ]
+}

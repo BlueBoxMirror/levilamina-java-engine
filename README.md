@@ -10,8 +10,8 @@
  * 环境变量包含 %JAVA_HOME%\bin\server\jvm.dll
 
 #### ~~画的饼~~
- - [ ] jnihelper（提升我的开发效率）
+ - [x] jnihelper（提升我的开发效率）
    - [x] 核心
-   - [ ] 胶水生成器 
+   - [x] 胶水生成器 
  - [ ] lje（之后再细分吧qwq）
 

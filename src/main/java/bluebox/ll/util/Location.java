@@ -1,11 +1,10 @@
 package bluebox.ll.util;
 
-import bluebox.ll.config.Configurable;
 import com.google.gson.annotations.Expose;
 
 import java.util.Objects;
 
-public class Location implements Cloneable ,Comparable<Location>, Configurable {
+public class Location implements Cloneable ,Comparable<Location> {
     public static final int OVERWORLD = 0;
     public static final int NETHER = 1;
     public static final int THE_END = 2;
@@ -22,8 +21,63 @@ public class Location implements Cloneable ,Comparable<Location>, Configurable {
         this.vector = vector;
         this.dimensionId = dimensionId;
     }
-    @Expose public final Vector vector;
-    @Expose public int dimensionId;
+    @Expose private Vector vector;
+    @Expose private int dimensionId;
+    public Vector getVector(){
+        return vector;
+    }
+    public int getBlockX(){
+        return vector.getBlockX();
+    }
+    public int getBlockY(){
+        return vector.getBlockY();
+    }
+    public int getBlockZ(){
+        return vector.getBlockZ();
+    }
+    public double getX(){
+        return vector.getX();
+    }
+    public double getY(){
+        return vector.getY();
+    }
+    public double getZ(){
+        return vector.getZ();
+    }
+    public int getDimId(){
+        return dimensionId;
+    }
+    public void setDimID(int dimId){
+        this.dimensionId=dimId;
+    }
+    public void setX(double x) {
+        vector.setX(x);
+    }
+    public void setY(double y) {
+        vector.setY(y);
+    }
+    public void setZ(double z) {
+        vector.setZ(z);
+    }
+    public void setX(int x){
+        vector.setX(x);
+    }
+    public void setY(int y){
+        vector.setY(y);
+    }
+    public void setZ(int z){
+        vector.setZ(z);
+    }
+    public void set(double x, double y, double z) {
+        setX(x);
+        setY(y);
+        setZ(z);
+    }
+    public void set(int x,int y,int z){
+        setX(x);
+        setY(y);
+        setZ(z);
+    }
 
     public String getDimensionName() {
         switch(dimensionId) {

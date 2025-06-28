@@ -1,3 +1,3 @@
 package bluebox.ll.event;
 
-public class Event{ }
+abstract public class Event{ }

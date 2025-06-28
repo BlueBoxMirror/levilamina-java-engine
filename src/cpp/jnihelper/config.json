@@ -8,6 +8,26 @@
     "bluebox.ll.plugin.LeviLamina",
     "java.io.File",
     "bluebox.ll.Logger",
-    "bluebox.ll.plugin.OtherPlugin"
+    "bluebox.ll.plugin.OtherPlugin",
+    "bluebox.ll.util.nbt.TagByte",
+    "bluebox.ll.util.nbt.TagByteArray",
+    "bluebox.ll.util.nbt.TagCompound",
+    "bluebox.ll.util.nbt.TagDouble",
+    "bluebox.ll.util.nbt.TagFloat",
+    "bluebox.ll.util.nbt.TagInt",
+    "bluebox.ll.util.nbt.TagIntArray",
+    "bluebox.ll.util.nbt.TagList",
+    "bluebox.ll.util.nbt.TagLong",
+    "bluebox.ll.util.nbt.TagShort",
+    "bluebox.ll.util.nbt.TagString",
+    "bluebox.ll.util.nbt.Tag",
+    "bluebox.ll.util.nbt.TagEnd",
+    "java.util.Set",
+    "java.util.Iterator",
+    "java.util.Map$Entry",
+    "java.lang.Object",
+    "bluebox.ll.world.actor.player.Player",
+    "bluebox.ll.world.actor.Actor",
+    "bluebox.ll.event.EventBus"
   ]
 }

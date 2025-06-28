@@ -1,18 +1,16 @@
 package bluebox.ll.util.nbt;
 
-public class TagDouble implements TagElement<Double> {
+public class TagDouble implements Tag {
     private double value;
     public TagDouble(double value) {
         this.value = value;
     }
 
-    @Override
-    public Double get() {
+    public double get() {
         return value;
     }
 
-    @Override
-    public void set(Double value) {
+    public void set(double value) {
         this.value=value;
     }
     @Override

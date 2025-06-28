@@ -14,12 +14,6 @@ public class TagByteArray implements Tag {
     public TagByteArray(byte[] bytes){
         this.value = bytes;
     }
-    public TagByteArray(Byte[] bytes){
-        this.value=new byte[bytes.length];
-        for(int i=0;i<bytes.length;i++){
-            this.value[i]=bytes[i];
-        }
-    }
     private byte[] value;
     public byte[] get(){
         return value;

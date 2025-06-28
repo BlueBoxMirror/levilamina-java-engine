@@ -3,8 +3,6 @@
 #include "PluginManager.h"
 #include "ll/api/mod/NativeMod.h"
 
-#include "jni.h"
-
 namespace lje {
 
 class LJE{

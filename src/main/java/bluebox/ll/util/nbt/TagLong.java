@@ -1,17 +1,14 @@
 package bluebox.ll.util.nbt;
 
-public class TagLong implements TagElement<Long> {
+public class TagLong implements Tag {
     private long value;
     public TagLong(long value) {
         this.value = value;
     }
-    @Override
-    public Long get() {
+    public long get() {
         return value;
     }
-
-    @Override
-    public void set(Long value) {
+    public void set(long value) {
         this.value=value;
     }
     @Override

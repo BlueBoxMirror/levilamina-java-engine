@@ -2,10 +2,13 @@ package bluebox.ll.event;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class EventBus{
-    private static final HashMap<String, LinkedList<EventListener<?>>> listeners = new HashMap<>();
+    private static final HashMap<String, LinkedList<EventListener<?>>> listenerMap = new HashMap<>();
+    private static LinkedList<EventListener<Event>> rootListeners = null;
 
     public static <T extends Event> @NotNull EventHandler<T> emplaceListener(Class<T> eventType, EventListener<T> listener){
         EventHandler<T> handler = new EventHandler<>(eventType, listener);
@@ -14,11 +17,30 @@ public class EventBus{
     }
 
     protected static <T extends Event> void register(@NotNull EventHandler<T> handler){
-        listeners.putIfAbsent(handler.type.getName(), new LinkedList<>());
-        listeners.get(handler.type.getName()).add(handler.listener);
+        listenerMap.putIfAbsent(handler.type.getName(), new LinkedList<>());
+        var listeners=EventBus.listenerMap.get(handler.type.getName());
+        listeners.add(handler.listener);
+        if(handler.type==Event.class){
+            EventBus.rootListeners= (LinkedList<EventListener<Event>>) handler.listener;
+        }
     }
     protected static <T extends Event> void unregister(@NotNull EventHandler<T> handler){
-        listeners.get(handler.type.getName()).remove(handler.listener);
+        listenerMap.get(handler.type.getName()).remove(handler.listener);
+    }
+
+    public static void publish(@NotNull NativeEvent event){
+        event.publishInNative();
+        LinkedList<EventListener<?>> listeners = EventBus.listenerMap.get(event.getClass().getName());
+        if(listeners!=null){
+            for(EventListener listener: listeners){
+                listener.onEvent(event);
+            }
+        }
+        if(rootListeners!=null){
+            for(EventListener<Event> listener: rootListeners){
+                listener.onEvent(event);
+            }
+        }
     }
 
     public static void publish(@NotNull Event event){
@@ -32,7 +54,7 @@ public class EventBus{
         queue.offer(Event.class.getName());
         while(!queue.isEmpty()){
             String name = queue.poll();
-            LinkedList<EventListener<?>> listeners = EventBus.listeners.get(name);
+            LinkedList<EventListener<?>> listeners = EventBus.listenerMap.get(name);
             if(listeners!=null){
                 for(EventListener listener: listeners){
                     listener.onEvent(event);

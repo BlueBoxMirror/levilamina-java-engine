@@ -1,18 +1,16 @@
 package bluebox.ll.util.nbt;
 
-public class TagString implements TagElement<String> {
+public class TagString implements Tag {
     private String value;
 
     public TagString(String value) {
         this.value = value;
     }
 
-    @Override
     public String get() {
         return value;
     }
 
-    @Override
     public void set(String value) {
         this.value=value;
     }

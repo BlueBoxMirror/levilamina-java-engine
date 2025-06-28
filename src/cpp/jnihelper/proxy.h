@@ -1,7 +1,9 @@
 #pragma once
 
+#include <functional>
 #include <jni.h>
 #include <memory>
+#include <vector>
 #include "jnihelper.h"
 
 
@@ -43,6 +45,7 @@ namespace jnihelper{
             Env& env;
             jobject jobj;
             jboolean isGlobal;
+            jboolean isRelease=false;
             Impl(Env& env,jobject jobj,jboolean isGlobal=false);
             ~Impl();
         };
@@ -53,6 +56,13 @@ namespace jnihelper{
         JavaObject(JavaClassSupplier jcls,jobject jobj,jboolean isGlobal=false);
         inline jobject get() const{
             return impl->jobj;
+        }
+        inline jobject release(){
+            impl->isRelease=true;
+            return impl->jobj;
+        }
+        inline jobject copyRef(){
+            return impl->env->NewGlobalRef(impl->jobj);
         }
         inline jboolean isGlobal() const{
             return impl->isGlobal;
@@ -69,7 +79,7 @@ namespace jnihelper{
             return impl->jobj==nullptr;
         }
         template<typename Object>
-        inline Object as(JavaClass<Object>& cls) const{
+        inline Object as(JavaClass<Object>& cls){
             return cls.change(*this);
         }
 
@@ -98,16 +108,16 @@ namespace jnihelper{
             impl.setGlobal();
         }
         jboolean isClassOf(JavaObject& obj) const;
-        inline Object package(jobject jobj) const{
-            return Object(impl,jobj);
+        inline Object package(jobject jobj,jboolean isGlobal=false) const{
+            return Object(impl,jobj,isGlobal);
         }
         inline Object change(JavaObject& obj) const{
-            return package(obj.get());
+            return package(obj.copyRef(),true);
         }
         inline Object null() const{
             return Object(impl,nullptr);
         }
-        inline Array<Object> array(jsize size) const{
+        inline Array<Object> array(jsize size=0) const{
             return Array<Object>(*(JavaClass<Object>*)this,size);
         }
         inline jclass get() const{

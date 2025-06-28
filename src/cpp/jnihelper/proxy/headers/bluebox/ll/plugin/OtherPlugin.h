@@ -34,8 +34,8 @@ namespace jnihelper::proxy::bluebox::ll::plugin {
     public:
         C_OtherPlugin(::jnihelper::Env& env);
         //{_static_}
-        //{_static_}//{_tag_}<init>(java.lang.String,bluebox.ll.Logger)bluebox.ll.plugin.OtherPlugin
-        ::jnihelper::proxy::bluebox::ll::plugin::O_OtherPlugin newObj(::jnihelper::proxy::java::lang::O_String name, ::jnihelper::proxy::bluebox::ll::O_Logger logger);
+        //{_tag_}<init>(java.lang.String,bluebox.ll.Logger)bluebox.ll.plugin.OtherPlugin
+        ::jnihelper::proxy::bluebox::ll::plugin::O_OtherPlugin newObj(::jnihelper::proxy::java::lang::O_String _name, ::jnihelper::proxy::bluebox::ll::O_Logger _logger);
     };
     
 }

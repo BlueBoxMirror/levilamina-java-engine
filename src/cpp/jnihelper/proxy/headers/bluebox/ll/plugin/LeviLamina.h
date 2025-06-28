@@ -22,14 +22,14 @@ namespace jnihelper::proxy::bluebox::ll::plugin {
     public:
         C_LeviLamina(::jnihelper::Env& env);
         //{_static_}
-        //{_static_}//{_static_}//{_static_}//{_static_}//{_tag_}preloadMods[getter]:java.util.HashMap
+        //{_tag_}preloadMods[getter]:java.util.HashMap
         ::jnihelper::proxy::java::util::O_HashMap f_preloadMods();
         //{_tag_}classLoader[setter]:java.net.URLClassLoader
         void f_classLoader(::jnihelper::proxy::java::net::O_URLClassLoader value);
         //{_tag_}getNativePlugin(java.lang.String)bluebox.ll.plugin.Plugin
-        ::jnihelper::proxy::bluebox::ll::plugin::O_Plugin m_getNativePlugin(::jnihelper::proxy::java::lang::O_String arg0);
+        ::jnihelper::proxy::bluebox::ll::plugin::O_Plugin m_getNativePlugin(::jnihelper::proxy::java::lang::O_String _name);
         //{_tag_}addPlugin(java.lang.String)void
-        void m_addPlugin(::jnihelper::proxy::java::lang::O_String arg0);
+        void m_addPlugin(::jnihelper::proxy::java::lang::O_String _modDirPath);
         //{_tag_}mods[getter]:java.util.HashMap
         ::jnihelper::proxy::java::util::O_HashMap f_mods();
         //{_tag_}<init>()bluebox.ll.plugin.LeviLamina
@@ -43,7 +43,7 @@ namespace jnihelper::proxy::bluebox::ll::plugin {
         //{_tag_}preloadMods[setter]:java.util.HashMap
         void f_preloadMods(::jnihelper::proxy::java::util::O_HashMap value);
         //{_tag_}hasPlugin(java.lang.String)boolean
-        ::jboolean m_hasPlugin(::jnihelper::proxy::java::lang::O_String arg0);
+        ::jboolean m_hasPlugin(::jnihelper::proxy::java::lang::O_String _name);
         //{_tag_}load()void
         void m_load();
         //{_tag_}getErrorStream()java.io.PrintStream
@@ -59,7 +59,7 @@ namespace jnihelper::proxy::bluebox::ll::plugin {
         //{_tag_}getOutputStream()java.io.PrintStream
         ::jnihelper::proxy::java::io::O_PrintStream m_getOutputStream();
         //{_tag_}init(java.io.File,bluebox.ll.Logger)void
-        void m_init(::jnihelper::proxy::java::io::O_File arg0, ::jnihelper::proxy::bluebox::ll::O_Logger arg1);
+        void m_init(::jnihelper::proxy::java::io::O_File _modRootDir, ::jnihelper::proxy::bluebox::ll::O_Logger _logger);
         //{_tag_}getModRootDir()java.io.File
         ::jnihelper::proxy::java::io::O_File m_getModRootDir();
         //{_tag_}classLoader[getter]:java.net.URLClassLoader
@@ -67,7 +67,7 @@ namespace jnihelper::proxy::bluebox::ll::plugin {
         //{_tag_}enable()void
         void m_enable();
         //{_tag_}unload(java.lang.String)boolean
-        ::jboolean m_unload(::jnihelper::proxy::java::lang::O_String arg0);
+        ::jboolean m_unload(::jnihelper::proxy::java::lang::O_String _name);
         //{_tag_}isPreloaded[getter]:boolean
         ::jboolean f_isPreloaded();
         //{_tag_}logger[getter]:bluebox.ll.Logger
@@ -79,7 +79,7 @@ namespace jnihelper::proxy::bluebox::ll::plugin {
         //{_tag_}isPreloaded[setter]:boolean
         void f_isPreloaded(::jboolean value);
         //{_tag_}getPlugin(java.lang.String)bluebox.ll.plugin.Plugin
-        ::jnihelper::proxy::bluebox::ll::plugin::O_Plugin m_getPlugin(::jnihelper::proxy::java::lang::O_String arg0);
+        ::jnihelper::proxy::bluebox::ll::plugin::O_Plugin m_getPlugin(::jnihelper::proxy::java::lang::O_String _name);
     };
     
 }

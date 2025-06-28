@@ -1,5 +1,7 @@
 #include <memory>
+#include <stdlib.h>
 #include <string>
+//#include <Windows.h>
 #include "Config.h"
 
 #include "Entry.h"
@@ -15,6 +17,7 @@
 #include "jnihelper/proxy/headers/java/io/File.h"
 #include "jnihelper/proxy/headers/bluebox/ll/Logger.h"
 #include "jnihelper/proxy/headers/java/lang/String.h"
+//#include "ll/api/utils/SystemUtils.h"
 
 namespace lje {
 
@@ -32,14 +35,68 @@ LJE_Manager& LJE::getPluginManager() { return *pluginManager; }
 bool LJE::load() {
     using namespace std;
     using namespace jnihelper;
-
+    //读取配置
     Config config;
     auto const& configPath=getSelf().getConfigDir()/"config.json";
     try{
         ll::config::loadConfig(config,configPath);
     }catch(...){}
     ll::config::saveConfig(config, configPath);
+    // //查找jvm.dll
+    // std::string finalPath;
+    // if(config.javaHome.empty()){
+    //     char* javaHome=nullptr;
+    //     size_t len=0;
+    //     _dupenv_s(&javaHome, &len, "JAVA_HOME");
+    //     if(javaHome && len>0){
+    //         //JAVA_HOME环境变量
+    //         finalPath=javaHome;
+    //     }
+    //     else{
+    //         //注册表查找
+    //         HKEY hKey;
+    //         LPCSTR subKey="SOFTWARE\\JavaSoft\\JDK";
+    //         if(RegOpenKeyExA(HKEY_LOCAL_MACHINE, subKey, 0, KEY_READ, &hKey) == ERROR_SUCCESS){
+    //             goto end;
+    //         }
+    //         char path[1024];
+    //         DWORD pathSize = sizeof(path);
+    //         char version[256];
+    //         DWORD versionSize = sizeof(version);
+    //         if (RegQueryValueExA(hKey, "CurrentVersion", NULL, NULL, (LPBYTE)version, &versionSize) != ERROR_SUCCESS) {
+    //             RegCloseKey(hKey);
+    //             goto end;
+    //         }
+    //         HKEY hSubKey;
+    //         std::string versionKey = std::string(subKey) + "\\" + version;
+    //         if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, versionKey.c_str(), 0, KEY_READ, &hSubKey) != ERROR_SUCCESS) {
+    //             RegCloseKey(hKey);
+    //             goto end;
+    //         }
+    //         if (RegQueryValueExA(hSubKey, "JavaHome", NULL, NULL, (LPBYTE)path, &pathSize) != ERROR_SUCCESS) {
+    //             RegCloseKey(hSubKey);
+    //             RegCloseKey(hKey);
+    //             goto end;
+    //         }
+    //         RegCloseKey(hSubKey);
+    //         RegCloseKey(hKey);
+    //         finalPath=path;
+    //     }
+    //     free(javaHome);
+    // }
+    // else{
+    //     //配置文件指定
+    //     finalPath=config.javaHome;
+    // }
+    // //添加jvm.dll到Path环境变量
+    // if(finalPath.ends_with("/") || finalPath.ends_with("\\")){
+    //     finalPath.pop_back();
+    // }
+    // finalPath+="/bin/server";
+    // ll::sys_utils::addOrSetEnvironmentVariable("Path", finalPath);
 
+    // end:
+    //创建JVM
     string fileOption = ("-Djava.class.path=" + getSelf().getModDir().string() + "/LeviLaminaJavaEngine.jar");
     vector<string> optionList={fileOption};
     getSelf().getLogger().info("JVM options: ");
@@ -54,7 +111,7 @@ bool LJE::load() {
     }
 
     JavaVMOption* options=new JavaVMOption[optionList.size()];
-    for(int i=0;i<optionList.size();i++){
+    for(size_t i=0;i<optionList.size();i++){
         options[i].optionString=(char*) optionList[i].c_str();
     }
 
@@ -76,35 +133,10 @@ bool LJE::load() {
 
     //尝试加载类
     IMPORT(bluebox::ll::plugin, LeviLamina)
-    
-    // 注册native事件
-    //lje::event::registerNatives();
-    
-
-    // 启动 LeviLamina 类
     IMPORT(java::io,File)
     IMPORT(bluebox::ll,Logger)
     IMPORT(java::lang,String)
     LeviLamina.m_init(File.newObj(String.newObj(ll::mod::getModsRoot().string())), Logger.newObj((jlong)&getSelf().getLogger()));
-
-    // jclass jclass_File=env->FindClass("Ljava/io/File;");
-    // jclass jclass_Logger=env->FindClass(JCLASS_Logger);
-    // jfieldID jfield_LeviLamina_modRootDir=env->GetStaticFieldID(jclass_LeviLamina, "modRootDir", "Ljava/io/File;");
-    // jfieldID jfield_LeviLamina_logger=env->GetStaticFieldID(jclass_LeviLamina, "logger", JCLASS_Logger);
-    // jmethodID jmethod_LeviLamina_init=env->GetStaticMethodID(jclass_LeviLamina, "init", "()V");
-    // jmethodID jmethod_LeviLamina_load=env->GetStaticMethodID(jclass_LeviLamina, "load", "()V");
-    // jmethodID jmethod_Logger_init=env->GetMethodID(jclass_Logger, "<init>", "(J)V");
-
-    // jstring jstring_native_path=env->NewStringUTF(ll::mod::getModsRoot().string().c_str());
-    // jobject jobject_native_modRootDir=env->NewObject(jclass_File, env->GetMethodID(jclass_File, "<init>", "(Ljava/lang/String;)V"), jstring_native_path);
-    // jobject jobject_native_logger=env->NewObject(jclass_Logger, jmethod_Logger_init, (jlong)&getSelf().getLogger());
-    // env->SetStaticObjectField(jclass_LeviLamina, jfield_LeviLamina_logger, jobject_native_logger);
-    // env->SetStaticObjectField(jclass_LeviLamina, jfield_LeviLamina_modRootDir, jobject_native_modRootDir);
-    // env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_init);
-    // env->CallStaticVoidMethod(jclass_LeviLamina, jmethod_LeviLamina_load);
-    // env->DeleteLocalRef(jstring_native_path);
-    // env->DeleteLocalRef(jobject_native_modRootDir);
-    // env->DeleteLocalRef(jobject_native_logger);
 
     // 注册插件管理器
     pluginManager=std::make_shared<LJE_Manager>();

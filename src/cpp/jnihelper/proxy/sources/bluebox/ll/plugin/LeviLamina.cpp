@@ -14,7 +14,7 @@ jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::C_LeviLamina(::jnihelper::E
 
 //{_instance_}
 //{_static_}
-//{_static_}//{_static_}//{_static_}//{_static_}//{_tag_}preloadMods[getter]:java.util.HashMap
+//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_tag_}preloadMods[getter]:java.util.HashMap
 ::jnihelper::proxy::java::util::O_HashMap jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::f_preloadMods(){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
@@ -29,18 +29,18 @@ void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::f_classLoader(::jnihel
     env->SetStaticObjectField(jcls,jfid,value.get());
 }
 //{_tag_}getNativePlugin(java.lang.String)bluebox.ll.plugin.Plugin
-::jnihelper::proxy::bluebox::ll::plugin::O_Plugin jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_getNativePlugin(::jnihelper::proxy::java::lang::O_String arg0){
+::jnihelper::proxy::bluebox::ll::plugin::O_Plugin jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_getNativePlugin(::jnihelper::proxy::java::lang::O_String _name){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"getNativePlugin","(Ljava/lang/String;)Lbluebox/ll/plugin/Plugin;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Lbluebox/ll/plugin/Plugin;")),env->CallStaticObjectMethod(jcls,jmid,arg0.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Lbluebox/ll/plugin/Plugin;")),env->CallStaticObjectMethod(jcls,jmid,_name.get())};
 }
 //{_tag_}addPlugin(java.lang.String)void
-void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_addPlugin(::jnihelper::proxy::java::lang::O_String arg0){
+void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_addPlugin(::jnihelper::proxy::java::lang::O_String _modDirPath){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"addPlugin","(Ljava/lang/String;)V");
-    env->CallStaticVoidMethod(jcls,jmid,arg0.get());
+    env->CallStaticVoidMethod(jcls,jmid,_modDirPath.get());
 }
 //{_tag_}mods[getter]:java.util.HashMap
 ::jnihelper::proxy::java::util::O_HashMap jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::f_mods(){
@@ -85,11 +85,11 @@ void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::f_preloadMods(::jnihel
     env->SetStaticObjectField(jcls,jfid,value.get());
 }
 //{_tag_}hasPlugin(java.lang.String)boolean
-::jboolean jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_hasPlugin(::jnihelper::proxy::java::lang::O_String arg0){
+::jboolean jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_hasPlugin(::jnihelper::proxy::java::lang::O_String _name){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"hasPlugin","(Ljava/lang/String;)Z");
-    return env->CallStaticBooleanMethod(jcls,jmid,arg0.get());
+    return env->CallStaticBooleanMethod(jcls,jmid,_name.get());
 }
 //{_tag_}load()void
 void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_load(){
@@ -141,11 +141,11 @@ void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_disable(){
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/PrintStream;")),env->CallStaticObjectMethod(jcls,jmid)};
 }
 //{_tag_}init(java.io.File,bluebox.ll.Logger)void
-void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_init(::jnihelper::proxy::java::io::O_File arg0, ::jnihelper::proxy::bluebox::ll::O_Logger arg1){
+void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_init(::jnihelper::proxy::java::io::O_File _modRootDir, ::jnihelper::proxy::bluebox::ll::O_Logger _logger){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"init","(Ljava/io/File;Lbluebox/ll/Logger;)V");
-    env->CallStaticVoidMethod(jcls,jmid,arg0.get(),arg1.get());
+    env->CallStaticVoidMethod(jcls,jmid,_modRootDir.get(),_logger.get());
 }
 //{_tag_}getModRootDir()java.io.File
 ::jnihelper::proxy::java::io::O_File jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_getModRootDir(){
@@ -169,11 +169,11 @@ void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_enable(){
     env->CallStaticVoidMethod(jcls,jmid);
 }
 //{_tag_}unload(java.lang.String)boolean
-::jboolean jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_unload(::jnihelper::proxy::java::lang::O_String arg0){
+::jboolean jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_unload(::jnihelper::proxy::java::lang::O_String _name){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"unload","(Ljava/lang/String;)Z");
-    return env->CallStaticBooleanMethod(jcls,jmid,arg0.get());
+    return env->CallStaticBooleanMethod(jcls,jmid,_name.get());
 }
 //{_tag_}isPreloaded[getter]:boolean
 ::jboolean jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::f_isPreloaded(){
@@ -211,9 +211,9 @@ void jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::f_isPreloaded(::jboole
     env->SetStaticBooleanField(jcls,jfid,value);
 }
 //{_tag_}getPlugin(java.lang.String)bluebox.ll.plugin.Plugin
-::jnihelper::proxy::bluebox::ll::plugin::O_Plugin jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_getPlugin(::jnihelper::proxy::java::lang::O_String arg0){
+::jnihelper::proxy::bluebox::ll::plugin::O_Plugin jnihelper::proxy::bluebox::ll::plugin::C_LeviLamina::m_getPlugin(::jnihelper::proxy::java::lang::O_String _name){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"getPlugin","(Ljava/lang/String;)Lbluebox/ll/plugin/Plugin;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Lbluebox/ll/plugin/Plugin;")),env->CallStaticObjectMethod(jcls,jmid,arg0.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Lbluebox/ll/plugin/Plugin;")),env->CallStaticObjectMethod(jcls,jmid,_name.get())};
 }

@@ -6,12 +6,6 @@ public class TagIntArray implements Tag{
     public TagIntArray(int[] value) {
         this.value = value;
     }
-    public TagIntArray(Integer[] value){
-        this.value = new int[value.length];
-        for(int i = 0; i < value.length; i++){
-            this.value[i] = value[i];
-        }
-    }
     @Override
     public int getId(){
         return INT_ARRAY;

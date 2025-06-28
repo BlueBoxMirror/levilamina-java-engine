@@ -77,10 +77,10 @@ void jnihelper::proxy::bluebox::ll::plugin::O_OtherPlugin::f_logger(::jnihelper:
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/lang/String;")),env->CallObjectMethod(jobj,jmid)};
 }
 //{_static_}
-//{_static_}//{_tag_}<init>(java.lang.String,bluebox.ll.Logger)bluebox.ll.plugin.OtherPlugin
-::jnihelper::proxy::bluebox::ll::plugin::O_OtherPlugin jnihelper::proxy::bluebox::ll::plugin::C_OtherPlugin::newObj(::jnihelper::proxy::java::lang::O_String name, ::jnihelper::proxy::bluebox::ll::O_Logger logger){
+//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_tag_}<init>(java.lang.String,bluebox.ll.Logger)bluebox.ll.plugin.OtherPlugin
+::jnihelper::proxy::bluebox::ll::plugin::O_OtherPlugin jnihelper::proxy::bluebox::ll::plugin::C_OtherPlugin::newObj(::jnihelper::proxy::java::lang::O_String _name, ::jnihelper::proxy::bluebox::ll::O_Logger _logger){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/lang/String;Lbluebox/ll/Logger;)V");
-    return {impl,env->NewObject(jcls,jmid,name.get(),logger.get())};
+    return {impl,env->NewObject(jcls,jmid,_name.get(),_logger.get())};
 }

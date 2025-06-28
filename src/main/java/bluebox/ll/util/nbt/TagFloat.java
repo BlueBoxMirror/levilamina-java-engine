@@ -1,17 +1,15 @@
 package bluebox.ll.util.nbt;
 
-public class TagFloat implements TagElement<Float> {
+public class TagFloat implements Tag {
     public TagFloat(float value) {
         this.value=value;
     }
     private float value;
-    @Override
-    public Float get() {
+    public float get() {
         return value;
     }
 
-    @Override
-    public void set(Float value) {
+    public void set(float value) {
         this.value=value;
     }
 

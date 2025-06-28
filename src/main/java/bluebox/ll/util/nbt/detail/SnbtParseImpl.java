@@ -302,13 +302,21 @@ public class SnbtParseImpl {
         ArrayList<Byte> res=parseNumArray(s,TagByte.class, (arr,num)->{
             arr.add(num.get());
         });
-        return new TagByteArray(res.toArray(new Byte[0]));
+        byte[] arr=new byte[res.size()];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=res.get(i);
+        }
+        return new TagByteArray(arr);
     }
     static Tag parseIntArray(StringBuilder s){
         ArrayList<Integer> res=parseNumArray(s,TagInt.class, (arr,num)->{
             arr.add(num.get());
         });
-        return new TagIntArray(res.toArray(new Integer[0]));
+        int[] arr=new int[res.size()];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=res.get(i);
+        }
+        return new TagIntArray(arr);
     }
     static Tag parseLongArray(StringBuilder s){
         ArrayList<Byte> res=parseNumArray(s,TagLong.class, (arr,num)->{
@@ -317,7 +325,11 @@ public class SnbtParseImpl {
                 arr.add((byte) (val >> (8 * j)));
             }
         });
-        return new TagByteArray(res.toArray(new Byte[0]));
+        byte[] arr=new byte[res.size()];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=res.get(i);
+        }
+        return new TagByteArray(arr);
     }
     static <T,H extends Tag> ArrayList<T> parseNumArray(StringBuilder s,Class<H> type, BiConsumer<ArrayList<T>,H> f){
         ArrayList<T> res=new ArrayList<>();

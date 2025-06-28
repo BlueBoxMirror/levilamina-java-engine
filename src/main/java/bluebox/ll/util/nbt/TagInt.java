@@ -1,17 +1,15 @@
 package bluebox.ll.util.nbt;
 
-public class TagInt implements TagElement<Integer> {
+public class TagInt implements Tag {
     private int value;
     public TagInt(int value) {
         this.value = value;
     }
-    @Override
-    public Integer get() {
+    public int get() {
         return value;
     }
 
-    @Override
-    public void set(Integer value) {
+    public void set(int value) {
         this.value=value;
     }
     @Override

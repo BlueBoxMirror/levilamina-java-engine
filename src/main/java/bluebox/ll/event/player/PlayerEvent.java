@@ -1,15 +1,18 @@
 package bluebox.ll.event.player;
 
-import bluebox.ll.world.entity.Player;
-import bluebox.ll.event.Event;
+import bluebox.ll.event.NativeEvent;
+import bluebox.ll.world.actor.player.Player;
 
-public class PlayerEvent extends Event {
-    public PlayerEvent(Player player){
+public class PlayerEvent extends NativeEvent {
+    public PlayerEvent(Player player) {
         this.player = player;
     }
-
-    /**
-     * 事件发生时，对应的玩家对象
-     */
-    public final Player player;
+    private final Player player;
+    public Player getPlayer() {
+        return player;
+    }
+    private static native void registerInNative();
+    static {
+        registerInNative();
+    }
 }

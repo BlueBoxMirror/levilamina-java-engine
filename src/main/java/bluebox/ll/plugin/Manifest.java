@@ -1,9 +1,8 @@
 package bluebox.ll.plugin;
 
-import bluebox.ll.config.Configurable;
 import com.google.gson.annotations.Expose;
 
-public class Manifest implements Configurable {
+public class Manifest{
     @Expose public String name;
     @Expose public String entry;
     @Expose public String type;

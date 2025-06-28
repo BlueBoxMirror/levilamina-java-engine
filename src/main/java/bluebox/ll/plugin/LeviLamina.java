@@ -28,18 +28,15 @@ public class LeviLamina{
     private static Logger logger;
     private static URLClassLoader classLoader;
     private static boolean isPreloaded=false;
+    private static void init(File modRootDir,Logger logger){
+        LeviLamina.modRootDir=modRootDir;
+        LeviLamina.logger=logger;
+        System.setErr(getErrorStream());
+        System.setOut(getOutputStream());
+    }
     public static ClassLoader getClassLoader(){
         return classLoader;
     }
-
-    private static void init(File modRootDir,Logger logger){
-        System.setErr(getErrorStream());
-        System.setOut(getOutputStream());
-        LeviLamina.modRootDir=modRootDir;
-        LeviLamina.logger=logger;
-    }
-
-
     public static File getModRootDir(){
         return modRootDir;
     }

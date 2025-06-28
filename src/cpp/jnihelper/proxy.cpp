@@ -26,6 +26,7 @@ namespace jnihelper{
     
     JavaObject::JavaObject(JavaClassSupplier cls,jobject jobj,jboolean isGlobal):cls(cls),impl(make_shared<Impl>(cls.getEnv(),jobj,isGlobal)){}
     JavaObject::Impl::~Impl(){
+        if(isRelease) return;
         if(isGlobal) env->DeleteGlobalRef(jobj);
         else env->DeleteLocalRef(jobj);
         if(env->ExceptionCheck()) env->ExceptionDescribe();//test

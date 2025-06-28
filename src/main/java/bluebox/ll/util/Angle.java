@@ -1,9 +1,8 @@
 package bluebox.ll.util;
 
-import bluebox.ll.config.Configurable;
 import com.google.gson.annotations.Expose;
 
-public class Angle implements Comparable<Angle>,Cloneable, Configurable {
+public class Angle implements Comparable<Angle>,Cloneable {
     @Expose protected double pitch,yaw;
     public Angle(double pitch, double yaw) {
         set(pitch, yaw);

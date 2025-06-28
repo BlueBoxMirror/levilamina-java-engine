@@ -1,6 +1,6 @@
 package bluebox.ll.util.nbt;
 
-public class TagByte implements TagElement<Byte> {
+public class TagByte implements Tag{
     private byte value;
     public TagByte(byte value) {
         this.value = value;
@@ -12,13 +12,11 @@ public class TagByte implements TagElement<Byte> {
         return value!= 0;
     }
 
-    @Override
-    public Byte get() {
+    public byte get() {
         return value;
     }
 
-    @Override
-    public void set(Byte value) {
+    public void set(byte value) {
         this.value=value;
     }
     public void set(boolean value){

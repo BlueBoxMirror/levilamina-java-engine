@@ -21,18 +21,18 @@ void jnihelper::proxy::java::io::O_File::f_path(::jnihelper::proxy::java::lang::
     env->SetObjectField(jobj,jfid,value.get());
 }
 //{_tag_}listFiles(java.io.FilenameFilter)[Ljava.io.File;
-::jnihelper::Array<::jnihelper::proxy::java::io::O_File> jnihelper::proxy::java::io::O_File::m_listFiles(::jnihelper::proxy::java::io::O_FilenameFilter arg0){
+::jnihelper::Array<::jnihelper::proxy::java::io::O_File> jnihelper::proxy::java::io::O_File::m_listFiles(::jnihelper::proxy::java::io::O_FilenameFilter _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"listFiles","(Ljava/io/FilenameFilter;)[Ljava/io/File;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/io/File;")),env->CallObjectMethod(jobj,jmid,arg0.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/io/File;")),env->CallObjectMethod(jobj,jmid,_arg0.get())};
 }
 //{_tag_}setWritable(boolean)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setWritable(::jboolean arg0){
+::jboolean jnihelper::proxy::java::io::O_File::m_setWritable(::jboolean _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setWritable","(Z)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0);
+    return env->CallBooleanMethod(jobj,jmid,_arg0);
 }
 //{_tag_}prefixLength[getter]:int
 ::jint jnihelper::proxy::java::io::O_File::f_prefixLength(){
@@ -42,18 +42,18 @@ void jnihelper::proxy::java::io::O_File::f_path(::jnihelper::proxy::java::lang::
     return env->GetIntField(jobj,jfid);
 }
 //{_tag_}equals(java.lang.Object)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_equals(::jnihelper::proxy::java::lang::O_Object arg0){
+::jboolean jnihelper::proxy::java::io::O_File::m_equals(::jnihelper::proxy::java::lang::O_Object _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"equals","(Ljava/lang/Object;)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0.get());
+    return env->CallBooleanMethod(jobj,jmid,_arg0.get());
 }
 //{_tag_}renameTo(java.io.File)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_renameTo(::jnihelper::proxy::java::io::O_File arg0){
+::jboolean jnihelper::proxy::java::io::O_File::m_renameTo(::jnihelper::proxy::java::io::O_File _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"renameTo","(Ljava/io/File;)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0.get());
+    return env->CallBooleanMethod(jobj,jmid,_arg0.get());
 }
 //{_tag_}getCanonicalFile()java.io.File
 ::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::O_File::m_getCanonicalFile(){
@@ -63,11 +63,11 @@ void jnihelper::proxy::java::io::O_File::f_path(::jnihelper::proxy::java::lang::
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallObjectMethod(jobj,jmid)};
 }
 //{_tag_}readObject(java.io.ObjectInputStream)void
-void jnihelper::proxy::java::io::O_File::m_readObject(::jnihelper::proxy::java::io::O_ObjectInputStream arg0){
+void jnihelper::proxy::java::io::O_File::m_readObject(::jnihelper::proxy::java::io::O_ObjectInputStream _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"readObject","(Ljava/io/ObjectInputStream;)V");
-    env->CallVoidMethod(jobj,jmid,arg0.get());
+    env->CallVoidMethod(jobj,jmid,_arg0.get());
 }
 //{_tag_}mkdir()boolean
 ::jboolean jnihelper::proxy::java::io::O_File::m_mkdir(){
@@ -77,25 +77,25 @@ void jnihelper::proxy::java::io::O_File::m_readObject(::jnihelper::proxy::java::
     return env->CallBooleanMethod(jobj,jmid);
 }
 //{_tag_}list(java.io.FilenameFilter)[Ljava.lang.String;
-::jnihelper::Array<::jnihelper::proxy::java::lang::O_String> jnihelper::proxy::java::io::O_File::m_list(::jnihelper::proxy::java::io::O_FilenameFilter arg0){
+::jnihelper::Array<::jnihelper::proxy::java::lang::O_String> jnihelper::proxy::java::io::O_File::m_list(::jnihelper::proxy::java::io::O_FilenameFilter _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"list","(Ljava/io/FilenameFilter;)[Ljava/lang/String;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/lang/String;")),env->CallObjectMethod(jobj,jmid,arg0.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/lang/String;")),env->CallObjectMethod(jobj,jmid,_arg0.get())};
 }
 //{_tag_}setExecutable(boolean)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setExecutable(::jboolean arg0){
+::jboolean jnihelper::proxy::java::io::O_File::m_setExecutable(::jboolean _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setExecutable","(Z)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0);
+    return env->CallBooleanMethod(jobj,jmid,_arg0);
 }
 //{_tag_}compareTo(java.lang.Object)int
-::jint jnihelper::proxy::java::io::O_File::m_compareTo(::jnihelper::proxy::java::lang::O_Object arg0){
+::jint jnihelper::proxy::java::io::O_File::m_compareTo(::jnihelper::proxy::java::lang::O_Object _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"compareTo","(Ljava/lang/Object;)I");
-    return env->CallIntMethod(jobj,jmid,arg0.get());
+    return env->CallIntMethod(jobj,jmid,_arg0.get());
 }
 //{_tag_}getTotalSpace()long
 ::jlong jnihelper::proxy::java::io::O_File::m_getTotalSpace(){
@@ -126,11 +126,11 @@ void jnihelper::proxy::java::io::O_File::m_deleteOnExit(){
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/nio/file/Path;")),env->GetObjectField(jobj,jfid)};
 }
 //{_tag_}setWritable(boolean,boolean)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setWritable(::jboolean arg0, ::jboolean arg1){
+::jboolean jnihelper::proxy::java::io::O_File::m_setWritable(::jboolean _arg0, ::jboolean _arg1){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setWritable","(ZZ)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0,arg1);
+    return env->CallBooleanMethod(jobj,jmid,_arg0,_arg1);
 }
 //{_tag_}toPath()java.nio.file.Path
 ::jnihelper::proxy::java::nio::file::O_Path jnihelper::proxy::java::io::O_File::m_toPath(){
@@ -154,11 +154,11 @@ void jnihelper::proxy::java::io::O_File::f_prefixLength(::jint value){
     env->SetIntField(jobj,jfid,value);
 }
 //{_tag_}setExecutable(boolean,boolean)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setExecutable(::jboolean arg0, ::jboolean arg1){
+::jboolean jnihelper::proxy::java::io::O_File::m_setExecutable(::jboolean _arg0, ::jboolean _arg1){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setExecutable","(ZZ)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0,arg1);
+    return env->CallBooleanMethod(jobj,jmid,_arg0,_arg1);
 }
 //{_tag_}hashCode()int
 ::jint jnihelper::proxy::java::io::O_File::m_hashCode(){
@@ -175,11 +175,11 @@ void jnihelper::proxy::java::io::O_File::f_prefixLength(::jint value){
     return env->CallBooleanMethod(jobj,jmid);
 }
 //{_tag_}setLastModified(long)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setLastModified(::jlong arg0){
+::jboolean jnihelper::proxy::java::io::O_File::m_setLastModified(::jlong _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setLastModified","(J)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0);
+    return env->CallBooleanMethod(jobj,jmid,_arg0);
 }
 //{_tag_}status[getter]:java.io.File$PathStatus
 ::jnihelper::proxy::java::io::O_File$PathStatus jnihelper::proxy::java::io::O_File::f_status(){
@@ -224,11 +224,11 @@ void jnihelper::proxy::java::io::O_File::f_status(::jnihelper::proxy::java::io::
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallObjectMethod(jobj,jmid)};
 }
 //{_tag_}listFiles(java.io.FileFilter)[Ljava.io.File;
-::jnihelper::Array<::jnihelper::proxy::java::io::O_File> jnihelper::proxy::java::io::O_File::m_listFiles(::jnihelper::proxy::java::io::O_FileFilter arg0){
+::jnihelper::Array<::jnihelper::proxy::java::io::O_File> jnihelper::proxy::java::io::O_File::m_listFiles(::jnihelper::proxy::java::io::O_FileFilter _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"listFiles","(Ljava/io/FileFilter;)[Ljava/io/File;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/io/File;")),env->CallObjectMethod(jobj,jmid,arg0.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/io/File;")),env->CallObjectMethod(jobj,jmid,_arg0.get())};
 }
 //{_tag_}filePath[setter]:java.nio.file.Path
 void jnihelper::proxy::java::io::O_File::f_filePath(::jnihelper::proxy::java::nio::file::O_Path value){
@@ -252,11 +252,11 @@ void jnihelper::proxy::java::io::O_File::f_filePath(::jnihelper::proxy::java::ni
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallObjectMethod(jobj,jmid)};
 }
 //{_tag_}compareTo(java.io.File)int
-::jint jnihelper::proxy::java::io::O_File::m_compareTo(::jnihelper::proxy::java::io::O_File arg0){
+::jint jnihelper::proxy::java::io::O_File::m_compareTo(::jnihelper::proxy::java::io::O_File _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"compareTo","(Ljava/io/File;)I");
-    return env->CallIntMethod(jobj,jmid,arg0.get());
+    return env->CallIntMethod(jobj,jmid,_arg0.get());
 }
 //{_tag_}getAbsolutePath()java.lang.String
 ::jnihelper::proxy::java::lang::O_String jnihelper::proxy::java::io::O_File::m_getAbsolutePath(){
@@ -273,11 +273,11 @@ void jnihelper::proxy::java::io::O_File::f_filePath(::jnihelper::proxy::java::ni
     return env->CallBooleanMethod(jobj,jmid);
 }
 //{_tag_}writeObject(java.io.ObjectOutputStream)void
-void jnihelper::proxy::java::io::O_File::m_writeObject(::jnihelper::proxy::java::io::O_ObjectOutputStream arg0){
+void jnihelper::proxy::java::io::O_File::m_writeObject(::jnihelper::proxy::java::io::O_ObjectOutputStream _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"writeObject","(Ljava/io/ObjectOutputStream;)V");
-    env->CallVoidMethod(jobj,jmid,arg0.get());
+    env->CallVoidMethod(jobj,jmid,_arg0.get());
 }
 //{_tag_}isHidden()boolean
 ::jboolean jnihelper::proxy::java::io::O_File::m_isHidden(){
@@ -378,11 +378,11 @@ void jnihelper::proxy::java::io::O_File::m_writeObject(::jnihelper::proxy::java:
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/io/File;")),env->CallObjectMethod(jobj,jmid)};
 }
 //{_tag_}setReadable(boolean)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setReadable(::jboolean arg0){
+::jboolean jnihelper::proxy::java::io::O_File::m_setReadable(::jboolean _arg0){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setReadable","(Z)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0);
+    return env->CallBooleanMethod(jobj,jmid,_arg0);
 }
 //{_tag_}getCanonicalPath()java.lang.String
 ::jnihelper::proxy::java::lang::O_String jnihelper::proxy::java::io::O_File::m_getCanonicalPath(){
@@ -427,11 +427,11 @@ void jnihelper::proxy::java::io::O_File::m_writeObject(::jnihelper::proxy::java:
     return env->CallBooleanMethod(jobj,jmid);
 }
 //{_tag_}setReadable(boolean,boolean)boolean
-::jboolean jnihelper::proxy::java::io::O_File::m_setReadable(::jboolean arg0, ::jboolean arg1){
+::jboolean jnihelper::proxy::java::io::O_File::m_setReadable(::jboolean _arg0, ::jboolean _arg1){
     ::jnihelper::Env& env=cls.getEnv();
     ::jobject jobj=get();
     ::jmethodID jmid=env->GetMethodID(cls.get(),"setReadable","(ZZ)Z");
-    return env->CallBooleanMethod(jobj,jmid,arg0,arg1);
+    return env->CallBooleanMethod(jobj,jmid,_arg0,_arg1);
 }
 //{_tag_}mkdirs()boolean
 ::jboolean jnihelper::proxy::java::io::O_File::m_mkdirs(){
@@ -441,7 +441,21 @@ void jnihelper::proxy::java::io::O_File::m_writeObject(::jnihelper::proxy::java:
     return env->CallBooleanMethod(jobj,jmid);
 }
 //{_static_}
-//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_tag_}pathSeparatorChar[getter]:char
+//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_static_}//{_tag_}FS[getter]:java.io.FileSystem
+::jnihelper::proxy::java::io::O_FileSystem jnihelper::proxy::java::io::C_File::f_FS(){
+    ::jnihelper::Env& env=impl.getEnv();
+    ::jclass jcls=get();
+    ::jfieldID jfid=env->GetStaticFieldID(jcls,"FS","Ljava/io/FileSystem;");
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/FileSystem;")),env->GetStaticObjectField(jcls,jfid)};
+}
+//{_tag_}FS[setter]:java.io.FileSystem
+void jnihelper::proxy::java::io::C_File::f_FS(::jnihelper::proxy::java::io::O_FileSystem value){
+    ::jnihelper::Env& env=impl.getEnv();
+    ::jclass jcls=get();
+    ::jfieldID jfid=env->GetStaticFieldID(jcls,"FS","Ljava/io/FileSystem;");
+    env->SetStaticObjectField(jcls,jfid,value.get());
+}
+//{_tag_}pathSeparatorChar[getter]:char
 ::jchar jnihelper::proxy::java::io::C_File::f_pathSeparatorChar(){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
@@ -463,26 +477,20 @@ void jnihelper::proxy::java::io::C_File::f_PATH_OFFSET(::jlong value){
     env->SetStaticLongField(jcls,jfid,value);
 }
 //{_tag_}<init>(java.lang.String)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String arg0){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String _arg0){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/lang/String;)V");
-    return {impl,env->NewObject(jcls,jmid,arg0.get())};
+    return {impl,env->NewObject(jcls,jmid,_arg0.get())};
 }
 //{_tag_}<init>(java.net.URI)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::net::O_URI arg0){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::net::O_URI _arg0){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/net/URI;)V");
-    return {impl,env->NewObject(jcls,jmid,arg0.get())};
+    return {impl,env->NewObject(jcls,jmid,_arg0.get())};
 }
-//{_tag_}fs[getter]:java.io.FileSystem
-::jnihelper::proxy::java::io::O_FileSystem jnihelper::proxy::java::io::C_File::f_fs(){
-    ::jnihelper::Env& env=impl.getEnv();
-    ::jclass jcls=get();
-    ::jfieldID jfid=env->GetStaticFieldID(jcls,"fs","Ljava/io/FileSystem;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/FileSystem;")),env->GetStaticObjectField(jcls,jfid)};
-}
+
 //{_tag_}PREFIX_LENGTH_OFFSET[getter]:long
 ::jlong jnihelper::proxy::java::io::C_File::f_PREFIX_LENGTH_OFFSET(){
     ::jnihelper::Env& env=impl.getEnv();
@@ -512,25 +520,19 @@ void jnihelper::proxy::java::io::C_File::f_serialVersionUID(::jlong value){
     return {::jnihelper::JavaClassSupplier(env,env->FindClass("[Ljava/io/File;")),env->CallStaticObjectMethod(jcls,jmid)};
 }
 //{_tag_}slashify(java.lang.String,boolean)java.lang.String
-::jnihelper::proxy::java::lang::O_String jnihelper::proxy::java::io::C_File::m_slashify(::jnihelper::proxy::java::lang::O_String arg0, ::jboolean arg1){
+::jnihelper::proxy::java::lang::O_String jnihelper::proxy::java::io::C_File::m_slashify(::jnihelper::proxy::java::lang::O_String _arg0, ::jboolean _arg1){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"slashify","(Ljava/lang/String;Z)Ljava/lang/String;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/lang/String;")),env->CallStaticObjectMethod(jcls,jmid,arg0.get(),arg1)};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/lang/String;")),env->CallStaticObjectMethod(jcls,jmid,_arg0.get(),_arg1)};
 }
-//{_tag_}fs[setter]:java.io.FileSystem
-void jnihelper::proxy::java::io::C_File::f_fs(::jnihelper::proxy::java::io::O_FileSystem value){
-    ::jnihelper::Env& env=impl.getEnv();
-    ::jclass jcls=get();
-    ::jfieldID jfid=env->GetStaticFieldID(jcls,"fs","Ljava/io/FileSystem;");
-    env->SetStaticObjectField(jcls,jfid,value.get());
-}
+
 //{_tag_}<init>(java.io.File,java.lang.String)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::io::O_File arg0, ::jnihelper::proxy::java::lang::O_String arg1){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::io::O_File _arg0, ::jnihelper::proxy::java::lang::O_String _arg1){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/io/File;Ljava/lang/String;)V");
-    return {impl,env->NewObject(jcls,jmid,arg0.get(),arg1.get())};
+    return {impl,env->NewObject(jcls,jmid,_arg0.get(),_arg1.get())};
 }
 //{_tag_}$assertionsDisabled[setter]:boolean
 void jnihelper::proxy::java::io::C_File::f_$assertionsDisabled(::jboolean value){
@@ -547,11 +549,11 @@ void jnihelper::proxy::java::io::C_File::f_UNSAFE(::jnihelper::proxy::jdk::inter
     env->SetStaticObjectField(jcls,jfid,value.get());
 }
 //{_tag_}<init>(java.lang.String,java.lang.String)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String arg0, ::jnihelper::proxy::java::lang::O_String arg1){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String _arg0, ::jnihelper::proxy::java::lang::O_String _arg1){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/lang/String;Ljava/lang/String;)V");
-    return {impl,env->NewObject(jcls,jmid,arg0.get(),arg1.get())};
+    return {impl,env->NewObject(jcls,jmid,_arg0.get(),_arg1.get())};
 }
 //{_tag_}pathSeparatorChar[setter]:char
 void jnihelper::proxy::java::io::C_File::f_pathSeparatorChar(::jchar value){
@@ -568,11 +570,11 @@ void jnihelper::proxy::java::io::C_File::f_pathSeparatorChar(::jchar value){
     return env->GetStaticBooleanField(jcls,jfid);
 }
 //{_tag_}createTempFile(java.lang.String,java.lang.String)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::m_createTempFile(::jnihelper::proxy::java::lang::O_String arg0, ::jnihelper::proxy::java::lang::O_String arg1){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::m_createTempFile(::jnihelper::proxy::java::lang::O_String _arg0, ::jnihelper::proxy::java::lang::O_String _arg1){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"createTempFile","(Ljava/lang/String;Ljava/lang/String;)Ljava/io/File;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallStaticObjectMethod(jcls,jmid,arg0.get(),arg1.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallStaticObjectMethod(jcls,jmid,_arg0.get(),_arg1.get())};
 }
 //{_tag_}pathSeparator[getter]:java.lang.String
 ::jnihelper::proxy::java::lang::O_String jnihelper::proxy::java::io::C_File::f_pathSeparator(){
@@ -596,25 +598,25 @@ void jnihelper::proxy::java::io::C_File::f_PREFIX_LENGTH_OFFSET(::jlong value){
     return env->GetStaticLongField(jcls,jfid);
 }
 //{_tag_}createTempFile(java.lang.String,java.lang.String,java.io.File)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::m_createTempFile(::jnihelper::proxy::java::lang::O_String arg0, ::jnihelper::proxy::java::lang::O_String arg1, ::jnihelper::proxy::java::io::O_File arg2){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::m_createTempFile(::jnihelper::proxy::java::lang::O_String _arg0, ::jnihelper::proxy::java::lang::O_String _arg1, ::jnihelper::proxy::java::io::O_File _arg2){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetStaticMethodID(jcls,"createTempFile","(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;)Ljava/io/File;");
-    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallStaticObjectMethod(jcls,jmid,arg0.get(),arg1.get(),arg2.get())};
+    return {::jnihelper::JavaClassSupplier(env,env->FindClass("Ljava/io/File;")),env->CallStaticObjectMethod(jcls,jmid,_arg0.get(),_arg1.get(),_arg2.get())};
 }
 //{_tag_}<init>(java.lang.String,java.io.File)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String arg0, ::jnihelper::proxy::java::io::O_File arg1){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String _arg0, ::jnihelper::proxy::java::io::O_File _arg1){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/lang/String;Ljava/io/File;)V");
-    return {impl,env->NewObject(jcls,jmid,arg0.get(),arg1.get())};
+    return {impl,env->NewObject(jcls,jmid,_arg0.get(),_arg1.get())};
 }
 //{_tag_}<init>(java.lang.String,int)java.io.File
-::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String arg0, ::jint arg1){
+::jnihelper::proxy::java::io::O_File jnihelper::proxy::java::io::C_File::newObj(::jnihelper::proxy::java::lang::O_String _arg0, ::jint _arg1){
     ::jnihelper::Env& env=impl.getEnv();
     ::jclass jcls=get();
     ::jmethodID jmid=env->GetMethodID(jcls,"<init>","(Ljava/lang/String;I)V");
-    return {impl,env->NewObject(jcls,jmid,arg0.get(),arg1)};
+    return {impl,env->NewObject(jcls,jmid,_arg0.get(),_arg1)};
 }
 //{_tag_}separatorChar[setter]:char
 void jnihelper::proxy::java::io::C_File::f_separatorChar(::jchar value){

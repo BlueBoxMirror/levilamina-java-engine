@@ -1,16 +1,14 @@
 package bluebox.ll.util.nbt;
 
-public class TagShort implements TagElement<Short> {
+public class TagShort implements Tag {
     private short value;
     public TagShort(short value) {
         this.value = value;
     }
-    @Override
-    public Short get() {
+    public short get() {
         return value;
     }
-    @Override
-    public void set(Short value) {
+    public void set(short value) {
         this.value = value;
     }
     @Override
